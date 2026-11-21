@@ -9,7 +9,7 @@
 # region : france | europe | amerique-nord | amerique-latine | afrique | asie | moyen-orient | monde
 # actif : false pour désactiver une source sans la supprimer
 # Les adresses de flux sont vérifiées par le workflow « Vérifier les flux » (onglet Actions).
-# 21/11/2026 : Marianne désactivé (le site refuse les lecteurs automatiques, erreur 405) ;
+# 21/11/2026 : Le Point (erreur 403) et Marianne désactivés (ces sites refusent les lecteurs automatiques) ;
 # The Times of Israel remplacé par The Jerusalem Post (erreur 403).
 
 sources:
@@ -31,7 +31,7 @@ sources:
   - {id: mediapart, nom: Mediapart, pays: FR, langue: fr, region: france, nature: independant, orientation: gauche, payant: true, flux: "https://www.mediapart.fr/articles/feed"}
   - {id: reporterre, nom: Reporterre, pays: FR, langue: fr, region: france, nature: independant, orientation: gauche, flux: "https://reporterre.net/spip.php?page=backend"}
   - {id: altereco, nom: Alternatives Économiques, pays: FR, langue: fr, region: france, nature: economique, orientation: gauche, payant: true, flux: "https://www.alternatives-economiques.fr/rss.xml"}
-  - {id: lepoint, nom: Le Point, pays: FR, langue: fr, region: france, nature: magazine, orientation: centre-droit, payant: true, flux: "https://www.lepoint.fr/24h-infos/rss.xml"}
+  - {id: lepoint, actif: false, nom: Le Point, pays: FR, langue: fr, region: france, nature: magazine, orientation: centre-droit, payant: true, flux: "https://www.lepoint.fr/24h-infos/rss.xml"}
   - {id: lopinion, nom: L'Opinion, pays: FR, langue: fr, region: france, nature: generaliste, orientation: centre-droit, payant: true, flux: "https://www.lopinion.fr/index.rss"}
   - {id: lesechos, nom: Les Échos, pays: FR, langue: fr, region: france, nature: economique, orientation: centre-droit, payant: true, flux: "https://services.lesechos.fr/rss/les-echos-economie.xml"}
   - {id: latribune, nom: La Tribune, pays: FR, langue: fr, region: france, nature: economique, orientation: centre-droit, flux: "https://www.latribune.fr/feed.xml"}
