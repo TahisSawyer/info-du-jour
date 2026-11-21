@@ -153,8 +153,21 @@ a.ref:hover { color: var(--accent); }
 .actions-detail { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 
 /* ---------------------------------------------------------------- rubriques, sources, archives */
-.rubrique { margin-bottom: 26px; }
-.rubrique-tete { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--encre); margin-bottom: 10px; }
+.rubriques-liste { display: grid; gap: 10px; }
+.rubrique { margin: 0; }
+.rub-bouton { width: 100%; display: flex; align-items: center; gap: 10px; padding: 14px 16px; border: 1px solid var(--ligne);
+  border-radius: var(--rayon); background: var(--surface); color: var(--encre); cursor: pointer; text-align: left;
+  font: 650 1.08rem var(--titre); }
+.rub-bouton:hover { border-color: var(--accent); }
+.rub-nom { flex: 1; }
+.rub-compte { font: 500 .82rem var(--texte); color: var(--encre-3); }
+.rub-chevron { font-size: 1.4rem; line-height: 1; color: var(--encre-3); transition: transform .2s; }
+.rubrique.ouverte .rub-chevron { transform: rotate(90deg); color: #fff; }
+/* rubrique ouverte : son bouton reste collé sous l'en-tête pour pouvoir la refermer à tout moment */
+.rubrique.ouverte .rub-bouton { position: sticky; top: var(--entete-h, 96px); z-index: 5; background: var(--accent); color: #fff;
+  border-color: var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,.18); }
+.rubrique.ouverte .rub-compte { color: rgba(255,255,255,.85); }
+.rub-contenu { padding-top: 10px; }
 .intro { color: var(--encre-2); margin-top: 0; }
 table { width: 100%; border-collapse: collapse; font-size: .9rem; }
 th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--ligne); vertical-align: top; }

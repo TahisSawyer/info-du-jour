@@ -167,9 +167,9 @@ function bandeaux() {
   $("#charger-nouvelle")?.addEventListener("click", async () => { etat.nouvelle = false; await chargerDerniere(true); afficher(); });
 }
 
-function teteEdition() {
+function teteEdition(avecEssentiel = true) {
   const e = etat.edition;
-  const ess = e.essentiel?.texte;
+  const ess = avecEssentiel ? e.essentiel?.texte : "";
   return `
     <div class="tete-edition">
       <span class="date">${dateLongue(e.date)}</span>
@@ -185,7 +185,8 @@ function teteEdition() {
 // ------------------------------------------------------------------ pages
 function pageAccueil(perimetre) {
   const e = etat.edition;
-  return `${teteEdition()}
+  // « L'essentiel » n'apparaît que sur l'onglet France : sur International, le Top 10 s'affiche tout de suite
+  return `${teteEdition(perimetre === "france")}
     <h1>${perimetre === "france" ? "Top 10 France" : "Top 10 International"}</h1>
     ${listeCartes(e.tops[perimetre] || [], true)}`;
 }
@@ -201,12 +202,48 @@ function ordreRubriques() {
 function pageRubriques() {
   const e = etat.edition;
   const par = Object.fromEntries(e.rubriques.map((r) => [r.id, r]));
-  const blocs = ordreRubriques().map((id) => par[id]).filter((r) => r && r.sujets.length).map((r) => `
-    <section class="rubrique" id="rub-${r.id}">
-      <div class="rubrique-tete"><h2>${esc(r.nom)}</h2></div>
-      ${listeCartes(r.sujets)}
-    </section>`).join("");
-  return `${teteEdition()}<p class="intro">Les sujets déjà présents dans les Tops 10 ne sont pas répétés ici. Ordre et affichage des rubriques : <a href="#/reglages">Réglages</a>.</p>${blocs || `<p class="vide">Aucune rubrique à afficher.</p>`}`;
+  const ouverte = sessionStorage.getItem("idj-rubrique-ouverte") || "";
+  const blocs = ordreRubriques().map((id) => par[id]).filter((r) => r && r.sujets.length).map((r) => {
+    const ouvert = r.id === ouverte;
+    return `
+    <section class="rubrique${ouvert ? " ouverte" : ""}" id="rub-${r.id}">
+      <button class="rub-bouton" type="button" aria-expanded="${ouvert}" aria-controls="rub-contenu-${r.id}" data-rubrique="${r.id}">
+        <span class="rub-nom">${esc(r.nom)}</span>
+        <span class="rub-compte">${r.sujets.length} sujet${r.sujets.length > 1 ? "s" : ""}</span>
+        <span class="rub-chevron" aria-hidden="true">›</span>
+      </button>
+      <div class="rub-contenu" id="rub-contenu-${r.id}" ${ouvert ? "" : "hidden"}>${listeCartes(r.sujets)}</div>
+    </section>`;
+  }).join("");
+  return `${teteEdition(false)}<h1>Rubriques</h1>
+    <p class="intro">Touchez une rubrique pour afficher ses sujets, puis touchez-la de nouveau pour la refermer.
+    Les sujets déjà présents dans les Tops 10 n'y sont pas répétés. Ordre et affichage : <a href="#/reglages">Réglages</a>.</p>
+    <div class="rubriques-liste">${blocs || `<p class="vide">Aucune rubrique à afficher.</p>`}</div>`;
+}
+
+function brancherRubriques() {
+  const entete = document.querySelector(".entete");
+  document.documentElement.style.setProperty("--entete-h", `${entete ? entete.offsetHeight : 0}px`);
+  document.querySelectorAll(".rub-bouton").forEach((b) => b.addEventListener("click", () => {
+    const section = b.closest(".rubrique");
+    const ouvrir = !section.classList.contains("ouverte");
+    // une seule rubrique ouverte à la fois : son bouton reste visible en haut de l'écran pour la refermer
+    document.querySelectorAll(".rubrique.ouverte").forEach((autre) => {
+      autre.classList.remove("ouverte");
+      autre.querySelector(".rub-bouton").setAttribute("aria-expanded", "false");
+      autre.querySelector(".rub-contenu").hidden = true;
+    });
+    if (ouvrir) {
+      section.classList.add("ouverte");
+      b.setAttribute("aria-expanded", "true");
+      section.querySelector(".rub-contenu").hidden = false;
+      sessionStorage.setItem("idj-rubrique-ouverte", b.dataset.rubrique);
+    } else {
+      sessionStorage.removeItem("idj-rubrique-ouverte");
+    }
+    const haut = section.getBoundingClientRect().top + window.scrollY - (entete ? entete.offsetHeight : 0) - 6;
+    window.scrollTo({ top: Math.max(haut, 0), behavior: "smooth" });
+  }));
 }
 
 function pageAnglesMorts() {
@@ -567,6 +604,7 @@ async function afficher() {
   main.innerHTML = (pages[route] || pages[""])();
   bandeaux();
   if (route === "reglages") brancherReglages();
+  if (route === "rubriques") brancherRubriques();
   if (route === "sujet") {
     $("#partager")?.addEventListener("click", () => navigator.share({ title: etat.edition.sujets[a1]?.titre, url: location.href }).catch(() => {}));
     if (!a2) window.scrollTo(0, 0);

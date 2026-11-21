@@ -1,0 +1,54 @@
+# Remet le site en ligne dès que l'application (dossier site/) est modifiée,
+# avec les données de la dernière édition, sans relancer la collecte ni l'IA.
+name: Publier le site
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: infodujour
+  cancel-in-progress: false
+
+env:
+  INFODUJOUR_ETAT: ${{ github.workspace }}/etat
+
+jobs:
+  assemblage:
+    name: Assemblage
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Récupération de l'état
+        run: |
+          mkdir -p etat
+          if git fetch --depth=1 origin etat 2>/dev/null; then git archive FETCH_HEAD | tar -x -C etat; fi
+      - name: Assemblage du site
+        run: |
+          pip install -q pyyaml
+          python -m infodujour site --sortie _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  mise_en_ligne:
+    name: Mise en ligne
+    needs: assemblage
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v4
