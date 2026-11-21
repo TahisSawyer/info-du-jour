@@ -232,8 +232,9 @@ function pageSujet(id, cle) {
   if ((s.points_de_vue || []).length) {
     pdv = `<section class="bloc"><h2>Points de vue en présence</h2><div class="colonnes">${s.points_de_vue.map((p) => `
       <div class="pdv"><strong>${esc(p.position)}</strong>${esc(p.synthese)}<div>${refs(p.sources)}</div></div>`).join("")}</div></section>`;
-  } else if (s.par_bord) {
-    pdv = `<section class="bloc"><h2>Comment chaque bord en parle</h2><div class="colonnes">${BORDS.map((b) => `
+  }
+  if (s.par_bord) {
+    pdv += `<section class="bloc"><h2>Comment chaque bord en parle</h2><div class="colonnes">${BORDS.map((b) => `
       <div class="colonne c-${b.id}"><h3>${b.nom}</h3>${(s.par_bord[b.id] || []).map((x) => `
         <p class="extrait"><span class="media">${esc(x.media)}${x.opinion ? " · tribune" : ""}</span>
         <a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.titre)}</a>${x.chapo ? `<br>${esc(x.chapo)}` : ""}</p>`).join("") || `<p class="vide">Aucun média de ce bord.</p>`}</div>`).join("")}</div></section>`;
