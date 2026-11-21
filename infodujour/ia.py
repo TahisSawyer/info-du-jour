@@ -381,6 +381,10 @@ class Redacteur:
                     break
                 non_traites.extend(lot)
                 continue
+            except Exception as exc:  # garde-fou : une anomalie imprévue ne doit jamais bloquer l'édition
+                log.warning("Erreur inattendue pendant la rédaction : %s", exc)
+                non_traites.extend(lot)
+                continue
             if isinstance(reponse, list):  # certains modèles renvoient directement la liste des sujets
                 reponse = {"sujets": reponse}
             elif not isinstance(reponse, dict):
