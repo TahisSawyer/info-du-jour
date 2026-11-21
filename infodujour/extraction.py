@@ -51,7 +51,7 @@ def resumer(sources: list[dict], max_phrases: int = 3, max_car: int = 650) -> st
     retenues: list[int] = []
     total = 0
     for i in ordre:
-        if any(sim[i, j] > 0.5 for j in retenues):
+        if any(sim[i, j] > 0.3 for j in retenues):
             continue
         longueur = len(candidates[i][0])
         if total + longueur > max_car and retenues:
