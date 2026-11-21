@@ -282,3 +282,26 @@ def test_reponse_sous_forme_de_liste(etat, monkeypatch):
     _brancher_fausse_ia(monkeypatch, comportement)
     e = _pipeline(etat)
     assert e["statut_ia"] == "complet"
+
+
+def test_sources_dans_une_seule_chaine():
+    from infodujour.ia import SortieSujet, valider
+
+    sujet = {"sources": [{"cle": "S1", "bord": "gauche"}, {"cle": "S2", "bord": "droite"}, {"cle": "S3", "bord": "centre"}]}
+    sortie = SortieSujet(id="T1", titre="Un titre factuel", resume="Phrase un sourcée ici [S1, S2]. Phrase deux sourcée là [S3].",
+                         controverse=True, points_de_vue=[
+                             {"position": "Partisans", "synthese": "Argument rapporté par les uns ici.", "sources": ["S1, S3"]},
+                             {"position": "Opposants", "synthese": "Argument rapporté par les autres là.", "sources": "S2"}])
+    assert valider(sortie, sujet) == []
+
+
+def test_debat_non_signale_accepte_avec_colonnes(etat):
+    from infodujour.ia import SortieSujet, appliquer, valider
+
+    sources = [{"cle": "S1", "bord": "gauche", "media": "A", "titre": "t", "chapo": "c", "url": "u", "opinion": False},
+               {"cle": "S2", "bord": "droite", "media": "B", "titre": "t", "chapo": "c", "url": "u", "opinion": False}]
+    sujet = {"id": "x", "sources": sources, "debat": True}
+    sortie = SortieSujet(id="T1", titre="Un titre factuel", resume="Première phrase factuelle et sourcée ici [S1]. Seconde phrase factuelle et sourcée là [S2].")
+    assert valider(sortie, sujet) == []
+    appliquer(sujet, sortie, "Test", "m")
+    assert sujet["statut_ia"] == "ia" and sujet["par_bord"]["gauche"] and sujet["par_bord"]["droite"]

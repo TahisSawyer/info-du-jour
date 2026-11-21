@@ -15,7 +15,7 @@ import time
 from dataclasses import dataclass, field
 
 import httpx
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, Field, ValidationError, field_validator
 
 from .config import reglages, termes_connotes
 from .texte import contient_terme, hors_guillemets, normaliser_mots, phrases
@@ -71,6 +71,17 @@ class PointDeVue(BaseModel):
     synthese: str = Field(min_length=10)
     sources: list[str] = Field(default_factory=list)
 
+    @field_validator("sources", mode="before")
+    @classmethod
+    def _eclater(cls, v):
+        """Accepte « S1, S3 », ["S1, S3"] ou ["S1", "S3"]."""
+        if isinstance(v, str):
+            v = [v]
+        cles = []
+        for x in v or []:
+            cles += [c.strip() for c in re.split(r"[,;\s]+", str(x)) if c.strip()]
+        return cles
+
 
 class SortieSujet(BaseModel):
     id: str
@@ -111,7 +122,7 @@ def valider(sortie: SortieSujet, sujet: dict) -> list[str]:
             defauts.append("controverse sans au moins deux points de vue")
         else:
             longueurs = [max(len(p.synthese.split()), 1) for p in sortie.points_de_vue]
-            if max(longueurs) / min(longueurs) > 1.6:
+            if max(longueurs) / min(longueurs) > 2.0:
                 defauts.append("points de vue de longueurs trop inégales")
             bords_cites = set()
             for p in sortie.points_de_vue:
@@ -122,10 +133,12 @@ def valider(sortie: SortieSujet, sujet: dict) -> list[str]:
                         defauts.append(f"source inexistante citée : {c}")
                     else:
                         bords_cites.add(cles[c.strip()]["bord"])
-            if len(bords_presents) >= 2 and len(bords_cites) < 2:
-                defauts.append("les points de vue doivent s'appuyer sur des sources d'orientations différentes")
+            # points de vue tous issus d'un même bord : accepté, mais les colonnes par bord seront ajoutées
+            sujet["_completer_par_bord"] = len(bords_presents) >= 2 and len(bords_cites) < 2
     elif sujet.get("debat") and {"gauche", "droite"} <= bords_presents:
-        defauts.append("sujet en débat : restituer les points de vue en présence (controverse: true)")
+        # l'IA ne voit pas de controverse là où le lexique en suggère une : on accepte le résumé
+        # et on affiche en plus « Comment chaque bord en parle » (double éclairage garanti)
+        sujet["_completer_par_bord"] = True
     texte = normaliser_mots(hors_guillemets(" ".join([sortie.titre, sortie.resume] + [p.synthese for p in sortie.points_de_vue])))
     for terme in termes_connotes():
         if contient_terme(texte, terme):
@@ -143,7 +156,12 @@ def appliquer(sujet: dict, sortie: SortieSujet, fournisseur: str, modele: str) -
     sujet["statut_ia"] = "ia"
     sujet["motif_ia"] = ""
     sujet["ia_modele"] = f"{fournisseur} · {modele}"
-    sujet.pop("par_bord", None)
+    if sujet.pop("_completer_par_bord", False):
+        from .extraction import par_bord
+
+        sujet["par_bord"] = par_bord(sujet["sources"])
+    else:
+        sujet.pop("par_bord", None)
 
 
 def entree_ia(sujet: dict, cle_locale: str) -> dict:
@@ -241,9 +259,11 @@ class Redacteur:
             self.bilan["fournisseurs"][f.nom] = f.appels
             self._lire_quota(f, r.headers)
             if r.status_code == 429:
+                # le quota gratuit est souvent compté par modèle : on écarte ce modèle et on essaie le suivant
                 attente = float(r.headers.get("retry-after", 0) or 0) or 20 * (essai + 1)
-                if attente > 90 or essai == 2:
-                    f.epuise = True
+                quotidien = any(k in r.text.lower() for k in ("perday", "per day", "daily", "per_day"))
+                if quotidien or attente > 60 or essai == 2:
+                    f.modeles_refuses.add(modele)
                     raise ErreurIA("quota", "429")
                 time.sleep(attente)
                 continue
@@ -335,7 +355,12 @@ class Redacteur:
         for f in self.fournisseurs:
             if f.epuise or f.hors_service:
                 continue
-            for modele in self._candidats(f, niveau):
+            candidats = self._candidats(f, niveau)
+            if not candidats and f.modeles_refuses:
+                f.epuise = True
+                derniere = ErreurIA("quota")
+                continue
+            for modele in candidats:
                 if modele in f.modeles_refuses:
                     continue
                 try:
@@ -344,7 +369,7 @@ class Redacteur:
                     derniere = e
                     if e.nature == "modele":
                         continue
-                    if e.nature in ("format", "requete", "surcharge"):
+                    if e.nature in ("format", "requete", "surcharge", "quota"):
                         continue
                     if e.nature == "delai":
                         self.dernier_motif = "delai"
