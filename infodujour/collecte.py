@@ -229,7 +229,8 @@ def collecter() -> dict:
         medias = stockage.lire_json("medias_api.json", {})
         medias.update(hors_cat)
         stockage.ecrire_json("medias_api.json", medias)
-    echecs = sorted(sid for sid, e in etats.items() if e.get("erreur"))
+    actifs = {s.id for s in sources() if s.actif}
+    echecs = sorted(sid for sid, e in etats.items() if e.get("erreur") and sid in actifs)
     bilan = {"etape": "collecte", "articles_ajoutes": ajoutes, "articles_connus": len(connus),
              "flux_en_echec": echecs, "via_api": len(nouveaux_api)}
     stockage.journaliser(bilan)
