@@ -250,3 +250,20 @@ def test_preparation_puis_reutilisation(etat, monkeypatch):
     e = edition.publier()
     tops = e["tops"]["france"] + e["tops"]["international"]
     assert all(e["sujets"][i]["statut_ia"] == "ia" for i in tops)
+
+
+def test_choix_automatique_des_modeles(monkeypatch):
+    """Si les modèles configurés n'existent plus, les plus récents « flash » sont choisis automatiquement."""
+    from infodujour import ia
+
+    monkeypatch.setenv("GEMINI_API_KEY", "test")
+    monkeypatch.delenv("MISTRAL_API_KEY", raising=False)
+    r = ia.Redacteur()
+    liste = {"data": [{"id": "models/gemini-3.6-flash"}, {"id": "models/gemini-3.5-flash-lite"},
+                      {"id": "models/gemini-3.1-flash-image"}, {"id": "models/gemini-embedding-2"}]}
+    r.client = httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(200, json=liste)))
+    f = r.fournisseurs[0]
+    f.modeles = {"tops": ["gemini-2.5-flash"], "rubriques": ["gemini-2.5-flash-lite"]}
+    assert r._candidats(f, "tops")[0] == "gemini-3.6-flash"
+    assert r._candidats(f, "rubriques")[0] == "gemini-3.5-flash-lite"
+    assert all("image" not in m and "embedding" not in m for m in r._candidats(f, "tops"))

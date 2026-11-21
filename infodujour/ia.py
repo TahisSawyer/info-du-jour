@@ -177,6 +177,7 @@ class Fournisseur:
     dernier_appel: float = 0.0
     modeles_refuses: set = field(default_factory=set)
     appels: int = 0
+    disponibles: list | None = None
 
 
 class ErreurIA(Exception):
@@ -242,6 +243,8 @@ class Redacteur:
                     raise ErreurIA("quota", "429")
                 time.sleep(attente)
                 continue
+            if r.status_code >= 400:
+                log.warning("%s · %s : HTTP %s %s", f.nom, modele, r.status_code, r.text[:300].replace("\n", " "))
             if r.status_code in (401, 403):
                 f.hors_service = True
                 raise ErreurIA("indisponible", f"clé refusée ({r.status_code})")
@@ -273,13 +276,54 @@ class Redacteur:
                 except ValueError:
                     pass
 
+    def _modeles_disponibles(self, f: Fournisseur) -> list[str]:
+        """Liste les modèles accessibles avec la clé (point d'accès /models compatible OpenAI).
+        Les noms de modèles changent souvent : on garde ceux de la configuration qui existent encore,
+        et à défaut on prend automatiquement les modèles « flash » ou « small » les plus récents."""
+        if f.disponibles is None:
+            f.disponibles = []
+            try:
+                url = f.url.rsplit("/chat/completions", 1)[0] + "/models"
+                r = self.client.get(url, headers={"Authorization": f"Bearer {f.cle}"}, timeout=30)
+                if r.status_code == 200:
+                    f.disponibles = [str(m.get("id", "")).split("/")[-1] for m in r.json().get("data", [])]
+                    log.info("%s : %s modèles disponibles", f.nom, len(f.disponibles))
+                else:
+                    log.warning("%s : liste des modèles indisponible (HTTP %s) %s", f.nom, r.status_code, r.text[:200])
+            except (httpx.HTTPError, ValueError) as exc:
+                log.warning("%s : liste des modèles indisponible (%s)", f.nom, exc)
+        return f.disponibles
+
+    def _candidats(self, f: Fournisseur, niveau: str) -> list[str]:
+        voulus = [m for m in f.modeles.get(niveau, []) if m not in f.modeles_refuses]
+        dispo = self._modeles_disponibles(f)
+        if not dispo:
+            return voulus
+        gardes = [m for m in voulus if m in dispo]
+        if gardes:
+            return gardes
+        exclus = ("image", "tts", "live", "audio", "embed", "vision", "imagen", "veo", "omni", "robotics",
+                  "computer", "preview", "exp", "thinking", "translate", "ocr", "moderation", "codestral")
+        auto = [m for m in dispo if any(k in m for k in ("flash", "small", "medium"))
+                and not any(k in m for k in exclus) and m not in f.modeles_refuses]
+
+        def cle_tri(m: str):
+            nombres = [float(x) for x in re.findall(r"\d+(?:\.\d+)?", m)] or [0.0]
+            leger = "lite" in m or "small" in m
+            return (leger if niveau == "tops" else not leger, -nombres[0])
+
+        auto.sort(key=cle_tri)
+        if auto:
+            log.info("%s : modèles configurés absents, choix automatique : %s", f.nom, auto[:3])
+        return auto[:3]
+
     def demander(self, niveau: str, systeme: str, contenu: str) -> tuple[dict, str, str]:
         """Essaie chaque fournisseur et chaque modèle autorisé ; lève ErreurIA si tous échouent."""
         derniere = ErreurIA("indisponible")
         for f in self.fournisseurs:
             if f.epuise or f.hors_service:
                 continue
-            for modele in f.modeles.get(niveau, []):
+            for modele in self._candidats(f, niveau):
                 if modele in f.modeles_refuses:
                     continue
                 try:
