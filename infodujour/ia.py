@@ -381,8 +381,14 @@ class Redacteur:
                     break
                 non_traites.extend(lot)
                 continue
+            if isinstance(reponse, list):  # certains modèles renvoient directement la liste des sujets
+                reponse = {"sujets": reponse}
+            elif not isinstance(reponse, dict):
+                reponse = {}
             recus = {}
             for brut in (reponse.get("sujets") or []):
+                if not isinstance(brut, dict):
+                    continue
                 try:
                     sortie = SortieSujet.model_validate(brut)
                     recus[sortie.id] = sortie
@@ -414,7 +420,9 @@ class Redacteur:
             reponse, _, _ = self.demander("tops", CONSIGNE_ESSENTIEL, json.dumps(entree, ensure_ascii=False))
         except ErreurIA:
             return None
-        texte = str(reponse.get("texte", "")).strip()
+        if isinstance(reponse, list):
+            reponse = reponse[0] if reponse and isinstance(reponse[0], dict) else {"texte": " ".join(map(str, reponse))}
+        texte = str(reponse.get("texte", "") if isinstance(reponse, dict) else reponse).strip()
         normal = normaliser_mots(hors_guillemets(texte))
         if len(texte) < 80 or any(contient_terme(normal, t) for t in termes_connotes()):
             return None

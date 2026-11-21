@@ -267,3 +267,18 @@ def test_choix_automatique_des_modeles(monkeypatch):
     assert r._candidats(f, "tops")[0] == "gemini-3.6-flash"
     assert r._candidats(f, "rubriques")[0] == "gemini-3.5-flash-lite"
     assert all("image" not in m and "embedding" not in m for m in r._candidats(f, "tops"))
+
+
+def test_reponse_sous_forme_de_liste(etat, monkeypatch):
+    """Un modèle qui renvoie la liste des sujets sans l'objet englobant ne doit pas faire échouer l'édition."""
+    monkeypatch.setenv("MISTRAL_API_KEY", "test")
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+
+    def comportement(requete, corps, n):
+        donnees = fausse_ia(corps)
+        contenu = donnees["sujets"] if "sujets" in donnees else [donnees]
+        return httpx.Response(200, json={"choices": [{"message": {"content": json.dumps(contenu)}}]})
+
+    _brancher_fausse_ia(monkeypatch, comportement)
+    e = _pipeline(etat)
+    assert e["statut_ia"] == "complet"
