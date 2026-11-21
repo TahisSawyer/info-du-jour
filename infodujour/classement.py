@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import math
+import re
 from collections import Counter
 from datetime import timedelta
 
@@ -12,13 +13,23 @@ from . import stockage
 from .config import BORD, LIBELLES_ORIENTATION, lexique_debat, reglages, rubriques, sources_par_id
 from .texte import MOTS_VIDES, contient_terme, empreinte, normaliser_mots
 
-_MOTS_FRANCE = ["france", "francais", "francaise", "paris", "assemblee nationale", "senat", "elysee", "matignon",
+_MOTS_FRANCE = ["france", "francais", "francaise", "francaises", "paris", "parlement", "deputes", "senateurs",
+                "gouvernement francais", "premier ministre", "emmanuel macron", "rassemblement national", "lfi",
+                "insoumis", "presidentielle", "municipales", "gendarmerie", "gendarmes", "policiers", "assemblee nationale", "senat", "elysee", "matignon",
                 "conseil constitutionnel", "conseil d'etat", "prefecture", "prefet", "sncf", "ratp", "bercy",
                 "marseille", "lyon", "toulouse", "lille", "bordeaux", "nantes", "strasbourg", "outre-mer",
                 "nouvelle-caledonie", "guadeloupe", "martinique", "corse", "bretagne", "hexagone", "smic", "urssaf"]
-_CATS_FRANCE = ["france", "politique", "societe", "regions", "paris", "ile-de-france", "faits-divers", "justice"]
+_MOTS_MONDE = ["union europeenne", "commission europeenne", "bruxelles", "parlement europeen", "onu", "otan",
+               "etats-unis", "americain", "washington", "trump", "russie", "russe", "moscou", "poutine", "ukraine",
+               "kiev", "chine", "pekin", "israel", "gaza", "cisjordanie", "iran", "liban", "syrie", "allemagne",
+               "berlin", "royaume-uni", "londres", "britannique", "espagne", "italie", "pologne", "maroc", "rabat",
+               "algerie", "tunisie", "inde", "japon", "bresil", "afrique", "eu", "us", "uk", "european", "brussels",
+               "nato", "un", "president trump", "china", "russia", "germany", "britain", "london"]
+_CATS_FRANCE = ["france", "politique", "societe", "regions", "paris", "ile de france", "faits divers", "justice",
+                "police justice", "elections"]
 _CATS_MONDE = ["international", "monde", "world", "europe", "afrique", "africa", "asie", "asia", "ameriques",
-               "americas", "moyen-orient", "middle east", "proche-orient", "us", "uk", "geopolitique"]
+               "americas", "moyen orient", "middle east", "proche orient", "us news", "uk news", "geopolitique",
+               "etats unis", "ukraine", "russie", "chine"]
 
 
 def infos_source(sid: str) -> dict:
@@ -40,16 +51,32 @@ def _entropie_normalisee(compte: Counter) -> float:
     return h / math.log(min(total, 7))
 
 
+def _jetons(a: dict) -> str:
+    """Mots des catégories du flux et du chemin de l'adresse (sans le nom de domaine), séparés par des espaces.
+    Exemple : https://www.lemonde.fr/international/article/... -> " international article ... "."""
+    from urllib.parse import urlparse
+
+    chemin = urlparse(a["url"]).path
+    brut = " ".join(a.get("categories", [])) + " " + chemin
+    return " " + re.sub(r"[^a-z0-9]+", " ", normaliser_mots(brut)) + " "
+
+
+def _contient(jetons: str, motif: str) -> bool:
+    motif = re.sub(r"[^a-z0-9]+", " ", normaliser_mots(motif)).strip()
+    return f" {motif} " in jetons
+
+
 def _perimetre(articles: list[dict], medias: list[dict]) -> str:
     part_inter = sum(1 for m in medias if m["region"] != "france") / max(len(medias), 1)
-    score_fr, score_int = 0.0, part_inter * 3
+    score_fr, score_int = 0.0, part_inter * 2
     for a in articles:
         texte = normaliser_mots(a["titre"] + " " + a["chapo"])
         score_fr += 0.6 * sum(1 for m in _MOTS_FRANCE if contient_terme(texte, m))
-        cats = normaliser_mots(" ".join(a.get("categories", [])) + " " + a["url"])
-        if any(c in cats for c in _CATS_MONDE):
+        score_int += 0.6 * sum(1 for m in _MOTS_MONDE if contient_terme(texte, m))
+        jetons = _jetons(a)
+        if any(_contient(jetons, c) for c in _CATS_MONDE):
             score_int += 1
-        elif any(c in cats for c in _CATS_FRANCE):
+        elif any(_contient(jetons, c) for c in _CATS_FRANCE):
             score_fr += 1
     score_fr /= max(len(articles), 1) ** 0.5
     score_int /= max(len(articles), 1) ** 0.5
@@ -60,9 +87,9 @@ def _rubrique(articles: list[dict]) -> str:
     scores: Counter = Counter()
     for a in articles:
         texte = normaliser_mots(a["titre"] + " " + a["chapo"])
-        cats = normaliser_mots(" ".join(a.get("categories", [])) + " " + a["url"])
+        jetons = _jetons(a)
         for r in rubriques():
-            if any(normaliser_mots(c) in cats for c in r.categories):
+            if any(_contient(jetons, c) for c in r.categories):
                 scores[r.id] += 2
             scores[r.id] += sum(1 for m in r.mots_cles if contient_terme(texte, m))
     if not scores or scores.most_common(1)[0][1] == 0:
