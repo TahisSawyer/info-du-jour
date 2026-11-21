@@ -1,6 +1,6 @@
 // Service worker : l'application s'ouvre hors ligne et affiche la dernière édition téléchargée.
-const VERSION = "idj-v1";
-const COQUILLE = ["./", "index.html", "style.css", "app.js", "manifest.webmanifest", "icones/icone.svg", "icones/icone-192.png"];
+const VERSION = "batnews-v2";
+const COQUILLE = ["./", "index.html", "style.css", "app.js", "manifest.webmanifest", "icones/favicon-32.png", "icones/icone-192.png", "icones/apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(COQUILLE)).then(() => self.skipWaiting()));

@@ -1,4 +1,4 @@
-# Info du Jour
+# Bat News (projet « Info du Jour »)
 
 Application d'actualités (PWA) pluraliste et gratuite.
 
@@ -34,6 +34,8 @@ Tout fonctionne sur les services gratuits de **GitHub**, sans serveur ni NAS :
 
 ### 2. Obtenir les clés d'IA (gratuites)
 - **Gemini (principal, gratuit)** : [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey). Cliquez **Create API key**.
+- **Groq (secours gratuit)** : [console.groq.com/keys](https://console.groq.com/keys), secret `GROQ_API_KEY`.
+- **OpenRouter (second secours gratuit)** : [openrouter.ai/settings/keys](https://openrouter.ai/settings/keys), secret `OPENROUTER_API_KEY` ; seuls les modèles gratuits « :free » sont utilisés.
 - **Mistral (facultatif, payant à l'usage)** : depuis fin 2026, Mistral ne propose plus d'offre gratuite pour l'API ; il faut la formule *Pay-as-you-go* sur [console.mistral.ai](https://console.mistral.ai) (quelques centimes par jour pour cette application).
 - Facultatif, pour élargir la couverture : [GNews](https://gnews.io), [NewsData.io](https://newsdata.io) et [The Guardian Open Platform](https://open-platform.theguardian.com/access/).
 

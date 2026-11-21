@@ -1,4 +1,4 @@
-// Info du Jour — application (PWA) sans dépendance ni étape de compilation.
+// Bat News — application (PWA) sans dépendance ni étape de compilation.
 // Les données viennent des fichiers JSON publiés dans « donnees/ » par le workflow GitHub Actions.
 
 const BORDS = [
@@ -305,7 +305,7 @@ function pageSources() {
   const catalogue = [...src.catalogue].sort((a, b) => ordreOrient.indexOf(a.orientation) - ordreOrient.indexOf(b.orientation) || a.nom.localeCompare(b.nom));
   const dernier = etat.pluralisme?.[etat.pluralisme.length - 1];
   return `<h1>Nos sources</h1>
-    <p class="intro">Info du Jour lit chaque heure les flux de ${src.catalogue.filter((c) => c.actif).length} médias aux lignes éditoriales variées.
+    <p class="intro">Bat News lit chaque heure les flux de ${src.catalogue.filter((c) => c.actif).length} médias aux lignes éditoriales variées.
     Chaque média compte pour une voix, quel que soit son nombre d'articles. Les orientations sont indicatives et modifiables.</p>
     <section class="bloc"><h2>Articles collectés sur 30 heures (${total})</h2><div class="repartition">${src.orientations.map((o) => `
       <div class="ligne"><span>${esc(o.libelle)}</span><span class="jauge"><span style="width:${(100 * (rep[o.id] || 0)) / max}%"></span></span><span>${rep[o.id] || 0}</span></div>`).join("")}</div></section>
@@ -586,7 +586,7 @@ async function verifierNouvelle() {
       etat.nouvelle = true;
       if (prefs.get("notifications", false) && "Notification" in window && Notification.permission === "granted") {
         const n = Object.values(e.sujets).filter(correspondMotsCles);
-        if (n.length) new Notification("Info du Jour", { body: `${n.length} sujet(s) sur vos mots-clés : ${n[0].titre}`, icon: "icones/icone-192.png" });
+        if (n.length) new Notification("Bat News", { body: `${n.length} sujet(s) sur vos mots-clés : ${n[0].titre}`, icon: "icones/icone-192.png" });
       }
       bandeaux();
     } else if (etat.derniere && e.rattrape_le !== etat.derniere.rattrape_le) {

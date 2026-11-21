@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 
 
 def texte_a_lire(edition: dict) -> str:
-    morceaux = [f"Info du Jour, édition du {edition['date']}."]
+    morceaux = [f"Bat News, édition du {edition['date']}."]
     ess = (edition.get("essentiel") or {}).get("texte")
     if ess:
         morceaux += ["L'essentiel.", sans_references(ess)]

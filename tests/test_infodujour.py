@@ -305,3 +305,33 @@ def test_debat_non_signale_accepte_avec_colonnes(etat):
     assert valider(sortie, sujet) == []
     appliquer(sujet, sortie, "Test", "m")
     assert sujet["statut_ia"] == "ia" and sujet["par_bord"]["gauche"] and sujet["par_bord"]["droite"]
+
+
+def test_openrouter_uniquement_modeles_gratuits(monkeypatch):
+    from infodujour import ia
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "test")
+    for v in ("GEMINI_API_KEY", "MISTRAL_API_KEY", "GROQ_API_KEY"):
+        monkeypatch.delenv(v, raising=False)
+    r = ia.Redacteur()
+    liste = {"data": [{"id": "openai/gpt-5"}, {"id": "meta-llama/llama-3.3-70b-instruct:free"},
+                      {"id": "qwen/qwen3-8b:free"}, {"id": "google/gemma-3-27b-it:free"}]}
+    r.client = httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(200, json=liste)))
+    f = r.fournisseurs[0]
+    assert f.nom == "OpenRouter"
+    f.modeles = {"tops": ["openai/gpt-5", "un-modele-disparu:free"], "rubriques": []}
+    candidats = r._candidats(f, "tops")
+    assert candidats and all(m.endswith(":free") for m in candidats)
+    assert candidats[0] == "meta-llama/llama-3.3-70b-instruct:free"
+
+
+def test_groq_identifiants_complets(monkeypatch):
+    from infodujour import ia
+
+    monkeypatch.setenv("GROQ_API_KEY", "test")
+    for v in ("GEMINI_API_KEY", "MISTRAL_API_KEY", "OPENROUTER_API_KEY"):
+        monkeypatch.delenv(v, raising=False)
+    r = ia.Redacteur()
+    liste = {"data": [{"id": "openai/gpt-oss-120b"}, {"id": "llama-3.3-70b-versatile"}]}
+    r.client = httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(200, json=liste)))
+    assert r._candidats(r.fournisseurs[0], "tops")[:2] == ["openai/gpt-oss-120b", "llama-3.3-70b-versatile"]

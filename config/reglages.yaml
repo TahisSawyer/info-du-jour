@@ -43,22 +43,37 @@ ia:
   actif: true
   taille_lot: 5                  # sujets envoyés par appel
   temperature: 0.2
-  # Fournisseurs essayés dans cet ordre. Les modèles « tops » rédigent les Tops 10 et l'essentiel,
+  # Fournisseurs essayés dans cet ordre (Gemini, puis les secours gratuits Groq et OpenRouter). Les modèles « tops » rédigent les Tops 10 et l'essentiel,
   # les modèles « rubriques » le reste. Si un modèle est refusé, le suivant de la liste est essayé.
   # Les noms de modèles évoluent : si aucun n'est disponible pour la clé, l'application choisit
   # automatiquement les modèles « flash » ou « small » les plus récents proposés par le fournisseur.
   fournisseurs:
-    - nom: Mistral
-      url: https://api.mistral.ai/v1/chat/completions
-      cle_env: MISTRAL_API_KEY
-      intervalle_s: 2
-      modeles: {tops: [mistral-medium-latest, mistral-small-latest], rubriques: [mistral-small-latest]}
     - nom: Gemini
       url: https://generativelanguage.googleapis.com/v1beta/openai/chat/completions
       cle_env: GEMINI_API_KEY
       intervalle_s: 13
       modeles: {tops: [gemini-3.6-flash, gemini-3.5-flash-lite, gemini-3.5-flash], rubriques: [gemini-3.5-flash-lite, gemini-3.1-flash-lite, gemini-3.6-flash]}
       parametres: {reasoning_effort: low}   # réflexion courte : réponses plus rapides (retiré si refusé)
+    # Secours gratuit n° 1 : Groq (sans carte bancaire ; quotas par modèle et par jour)
+    - nom: Groq
+      url: https://api.groq.com/openai/v1/chat/completions
+      cle_env: GROQ_API_KEY
+      intervalle_s: 20
+      modeles: {tops: [openai/gpt-oss-120b, llama-3.3-70b-versatile, qwen/qwen3-32b], rubriques: [openai/gpt-oss-120b, llama-3.3-70b-versatile, qwen/qwen3-32b]}
+      parametres: {reasoning_effort: low}
+    # Secours gratuit n° 2 : OpenRouter, modèles « :free » (choisis automatiquement s'ils changent)
+    - nom: OpenRouter
+      url: https://openrouter.ai/api/v1/chat/completions
+      cle_env: OPENROUTER_API_KEY
+      intervalle_s: 4
+      gratuit_seulement: true
+      modeles: {tops: [meta-llama/llama-3.3-70b-instruct:free, openai/gpt-oss-120b:free], rubriques: [meta-llama/llama-3.3-70b-instruct:free, openai/gpt-oss-120b:free]}
+    # Facultatif et payant à l'usage : utilisé seulement si la clé MISTRAL_API_KEY est fournie
+    - nom: Mistral
+      url: https://api.mistral.ai/v1/chat/completions
+      cle_env: MISTRAL_API_KEY
+      intervalle_s: 2
+      modeles: {tops: [mistral-medium-latest, mistral-small-latest], rubriques: [mistral-small-latest]}
   reutilisation_jaccard: 0.70    # un résumé est réutilisé si le sujet a peu changé
   reutilisation_nouveaux_max: 3
 

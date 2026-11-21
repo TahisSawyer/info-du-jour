@@ -48,7 +48,8 @@ h3 { font-size: 1.12rem; }
 .entete { position: sticky; top: 0; z-index: 10; background: var(--encre); color: #fff; padding-top: env(safe-area-inset-top); }
 :root[data-theme="sombre"] .entete, .entete { background: #1d2733; }
 .entete-haut { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 980px; margin: 0 auto; padding: 10px 16px 6px; }
-.marque { color: #fff; text-decoration: none; font: 700 1.45rem/1 var(--titre); letter-spacing: .01em; }
+.marque { color: #fff; text-decoration: none; font: 700 1.45rem/1 var(--titre); letter-spacing: .01em; display: inline-flex; align-items: center; gap: 8px; }
+.marque img { border-radius: 6px; }
 .marque span { font-style: italic; font-weight: 400; opacity: .8; }
 .entete-actions { display: flex; gap: 8px; align-items: center; }
 .bouton { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--ligne); background: var(--surface); color: var(--encre);

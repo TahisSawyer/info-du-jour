@@ -197,6 +197,7 @@ class Fournisseur:
     appels: int = 0
     disponibles: list | None = None
     extra: dict = field(default_factory=dict)
+    gratuit_seulement: bool = False
 
 
 class ErreurIA(Exception):
@@ -217,7 +218,8 @@ class Redacteur:
             cle = os.environ.get(f["cle_env"], "").strip()
             if cle:
                 self.fournisseurs.append(Fournisseur(f["nom"], f["url"], cle, f.get("intervalle_s", 2), f["modeles"],
-                                                     extra=dict(f.get("parametres", {}) or {})))
+                                                     extra=dict(f.get("parametres", {}) or {}),
+                                                     gratuit_seulement=bool(f.get("gratuit_seulement", False))))
         self.client = httpx.Client(timeout=120)
         self.bilan = {"appels": 0, "rejets": 0, "fournisseurs": {}}
         self.dernier_motif = "indisponible"
@@ -318,7 +320,8 @@ class Redacteur:
                 url = f.url.rsplit("/chat/completions", 1)[0] + "/models"
                 r = self.client.get(url, headers={"Authorization": f"Bearer {f.cle}"}, timeout=30)
                 if r.status_code == 200:
-                    f.disponibles = [str(m.get("id", "")).split("/")[-1] for m in r.json().get("data", [])]
+                    ids = [str(m.get("id", "")) for m in r.json().get("data", [])]
+                    f.disponibles = sorted(set(ids) | {i.split("/")[-1] for i in ids if i.startswith("models/")})
                     log.info("%s : %s modèles disponibles", f.nom, len(f.disponibles))
                 else:
                     log.warning("%s : liste des modèles indisponible (HTTP %s) %s", f.nom, r.status_code, r.text[:200])
@@ -327,7 +330,8 @@ class Redacteur:
         return f.disponibles
 
     def _candidats(self, f: Fournisseur, niveau: str) -> list[str]:
-        voulus = [m for m in f.modeles.get(niveau, []) if m not in f.modeles_refuses]
+        voulus = [m for m in f.modeles.get(niveau, []) if m not in f.modeles_refuses
+                  and (not f.gratuit_seulement or m.endswith(":free"))]
         dispo = self._modeles_disponibles(f)
         if not dispo:
             return voulus
@@ -336,10 +340,18 @@ class Redacteur:
             return gardes
         exclus = ("image", "tts", "live", "audio", "embed", "vision", "imagen", "veo", "omni", "robotics",
                   "computer", "preview", "exp", "thinking", "translate", "ocr", "moderation", "codestral")
-        auto = [m for m in dispo if any(k in m for k in ("flash", "small", "medium"))
-                and not any(k in m for k in exclus) and m not in f.modeles_refuses]
+        if f.gratuit_seulement:  # OpenRouter : uniquement les modèles gratuits (« :free »), jamais payants
+            auto = [m for m in dispo if m.endswith(":free") and not any(k in m for k in exclus)
+                    and any(k in m for k in ("instruct", "chat", "gpt-oss", "llama", "qwen", "mistral", "gemma"))
+                    and m not in f.modeles_refuses]
+        else:
+            auto = [m for m in dispo if any(k in m for k in ("flash", "small", "medium"))
+                    and not any(k in m for k in exclus) and m not in f.modeles_refuses]
 
         def cle_tri(m: str):
+            if f.gratuit_seulement:  # le plus gros modèle gratuit d'abord (ex. 120b, 70b)
+                tailles = [float(x) for x in re.findall(r"(\d+(?:\.\d+)?)b\b", m)] or [0.0]
+                return (False, -max(tailles))
             nombres = [float(x) for x in re.findall(r"\d+(?:\.\d+)?", m)] or [0.0]
             leger = "lite" in m or "small" in m
             return (leger if niveau == "tops" else not leger, -nombres[0])
