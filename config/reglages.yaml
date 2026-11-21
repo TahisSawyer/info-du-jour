@@ -1,0 +1,71 @@
+# Réglages généraux d'Info du Jour
+# Toutes les heures sont en heure de Paris (le changement d'heure est géré automatiquement).
+
+fuseau: Europe/Paris
+
+planning:
+  collecte_debut: "06:00"        # pas de collecte la nuit
+  collecte_fin: "22:00"
+  preparation: ["15:00", "16:00"] # résumés IA préparés à l'avance pour les sujets qui montent
+  edition: "17:30"               # lancement de l'édition (publication vers 17h45-17h55)
+  rattrapage_fin: "22:00"        # relance de l'IA sur les sujets « Sans IA » jusqu'à cette heure
+  rattrapage_auto: true
+  delai_min_rafraichissement_min: 30   # délai minimal entre deux rafraîchissements manuels
+  budget_edition_min: 20         # au-delà, les sujets restants passent en mode sans IA
+
+collecte:
+  fenetre_heures: 30             # articles retenus pour une édition
+  conservation_heures: 72        # articles gardés en mémoire entre deux exécutions
+  delai_requete_s: 20
+  requetes_simultanees: 10
+  alerte_echecs_consecutifs: 3   # un flux en échec 3 fois de suite est signalé dans « Nos sources »
+
+regroupement:
+  moteur: auto                   # auto | fastembed | tfidf  (auto = fastembed s'il est installé)
+  modele: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+  distance_fastembed: 0.42       # distance cosinus maximale entre articles d'un même sujet
+  distance_tfidf: 0.86
+  seuil_depeche: 0.80            # similarité de chapô au-delà de laquelle on parle d'une reprise de dépêche
+  poids_reprise: 0.25            # un média qui ne fait que reprendre une dépêche compte pour 0,25
+
+classement:
+  poids: {couverture: 0.45, diversite: 0.25, fraicheur: 0.20, reprise: 0.10}
+  demi_vie_heures: 12
+  taille_top: 10
+  sujets_par_rubrique: 5
+  rubriques_hors_tops: true      # un sujet déjà dans un Top 10 n'est pas répété dans sa rubrique
+  medias_min_top: 2
+  sources_affichees: 6
+  angles_morts_max: 5
+  angles_morts_medias_min: 4
+
+ia:
+  actif: true
+  taille_lot: 5                  # sujets envoyés par appel
+  temperature: 0.2
+  # Fournisseurs essayés dans cet ordre. Les modèles « tops » rédigent les Tops 10 et l'essentiel,
+  # les modèles « rubriques » le reste. Si un modèle est refusé, le suivant de la liste est essayé.
+  # Les noms de modèles évoluent : vérifiez-les dans la console de chaque fournisseur.
+  fournisseurs:
+    - nom: Mistral
+      url: https://api.mistral.ai/v1/chat/completions
+      cle_env: MISTRAL_API_KEY
+      intervalle_s: 2
+      modeles: {tops: [mistral-medium-latest, mistral-small-latest], rubriques: [mistral-small-latest]}
+    - nom: Gemini
+      url: https://generativelanguage.googleapis.com/v1beta/openai/chat/completions
+      cle_env: GEMINI_API_KEY
+      intervalle_s: 13
+      modeles: {tops: [gemini-2.5-flash, gemini-2.5-flash-lite], rubriques: [gemini-2.5-flash-lite, gemini-2.5-flash]}
+  reutilisation_jaccard: 0.70    # un résumé est réutilisé si le sujet a peu changé
+  reutilisation_nouveaux_max: 3
+
+pluralisme:
+  alerte_part_max: 0.35          # alerte si une sensibilité dépasse 35 % des liens affichés
+  alerte_part_min: 0.10          # ou passe sous 10 %
+
+audio:
+  actif: false                   # mettre à true pour générer l'édition audio (synthèse vocale Piper)
+  voix: fr_FR-siwis-medium
+
+archives_jours: 365

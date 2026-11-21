@@ -1,0 +1,38 @@
+# Rubriques thématiques : ordre d'affichage par défaut, mots-clés (titres, chapôs)
+# et motifs reconnus dans les catégories des flux RSS ou dans les adresses des articles.
+# Chaque lecteur peut ensuite réordonner ou masquer les rubriques dans la PWA (Réglages).
+# Mots-clés en minuscules, sans accent nécessaire (la comparaison ignore les accents).
+
+rubriques:
+  - id: politique
+    nom: Politique
+    categories: [politique, politics, elections, election, gouvernement, parlement]
+    mots_cles: [gouvernement, ministre, premier ministre, president de la republique, elysee, matignon, assemblee nationale, senat, depute, senateur, parti, election, scrutin, vote, motion de censure, 49.3, reforme, opposition, majorite, coalition, parliament, minister, prime minister, president, election, campaign, senate, congress, lawmakers, opposition]
+  - id: economie
+    nom: Économie & Finance
+    categories: [economie, economy, business, finance, marches, bourse, entreprises, emploi, money, markets]
+    mots_cles: [economie, croissance, inflation, budget, deficit, dette, impot, taxe, bourse, cac 40, marches, banque, bce, taux, entreprise, emploi, chomage, salaire, retraite, pib, faillite, licenciement, investissement, economy, inflation, budget, debt, tax, stocks, markets, bank, rates, tariffs, jobs, unemployment, gdp, earnings, trade]
+  - id: technologie
+    nom: Technologie
+    categories: [tech, technologie, technology, numerique, sciences-tech, high-tech, pixels]
+    mots_cles: [intelligence artificielle, ia, numerique, internet, cyberattaque, cybersecurite, donnees, logiciel, smartphone, apple, google, microsoft, meta, openai, startup, semi-conducteur, puce, reseau social, artificial intelligence, ai, tech, cyber, data, software, chip, semiconductor, startup, social media]
+  - id: sciences-environnement
+    nom: Sciences & Environnement
+    categories: [sciences, science, environnement, environment, climat, climate, planete, ecologie, espace]
+    mots_cles: [climat, rechauffement, cop, biodiversite, pollution, energie, nucleaire, renouvelable, secheresse, inondation, canicule, ecologie, espace, nasa, esa, fusee, recherche, chercheurs, decouverte, climate, warming, emissions, biodiversity, pollution, energy, nuclear, drought, flood, space, research, scientists]
+  - id: sante
+    nom: Santé
+    categories: [sante, health, medecine]
+    mots_cles: [sante, hopital, medecin, patients, maladie, epidemie, virus, vaccin, cancer, medicament, securite sociale, soins, grippe, covid, health, hospital, doctors, disease, outbreak, vaccine, cancer, drug]
+  - id: culture
+    nom: Culture
+    categories: [culture, arts, cinema, musique, livres, music, books, film, television, medias]
+    mots_cles: [cinema, film, festival, musique, concert, livre, roman, ecrivain, exposition, musee, theatre, serie, artiste, prix goncourt, cesar, oscars, album, film, music, book, novel, museum, artist, award]
+  - id: sport
+    nom: Sport
+    categories: [sport, sports, football, rugby, tennis, cyclisme]
+    mots_cles: [football, ligue 1, psg, om, rugby, tennis, cyclisme, tour de france, jeux olympiques, jo, match, championnat, coupe du monde, entraineur, joueur, selection, football, soccer, rugby, tennis, olympics, match, championship, world cup, coach, player]
+  - id: societe
+    nom: Société
+    categories: [societe, society, faits-divers, justice, education, france, police]
+    mots_cles: [justice, proces, tribunal, police, gendarmerie, ecole, education, enseignants, logement, transports, greve, manifestation, immigration, religion, laicite, famille, jeunes, court, trial, police, school, housing, strike, protest, immigration]

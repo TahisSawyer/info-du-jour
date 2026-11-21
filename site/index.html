@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Info du Jour</title>
+  <meta name="description" content="L'actualité du jour, synthétisée à partir de médias de toutes sensibilités.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1d2733">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icones/icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icones/icone-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Info du Jour">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="entete">
+    <div class="entete-haut">
+      <a class="marque" href="#/">Info <span>du</span> Jour</a>
+      <div class="entete-actions">
+        <button id="btn-rafraichir" class="bouton bouton-plein" type="button" title="Lancer une nouvelle édition">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Rafraîchir</span>
+        </button>
+        <a class="bouton bouton-icone" href="#/reglages" title="Réglages" aria-label="Réglages">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm7.4-3a7.4 7.4 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-2-1.2L14.5 3h-5l-.4 2.6a7.6 7.6 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 0 0 2 1.2l.4 2.6h5l.4-2.6a7.6 7.6 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+    <nav class="onglets" aria-label="Sections">
+      <a href="#/" data-onglet="france">France</a>
+      <a href="#/international" data-onglet="international">International</a>
+      <a href="#/rubriques" data-onglet="rubriques">Rubriques</a>
+      <a href="#/angles-morts" data-onglet="angles-morts">Angles morts</a>
+      <a href="#/sources" data-onglet="sources">Nos sources</a>
+      <a href="#/archives" data-onglet="archives">Archives</a>
+    </nav>
+  </header>
+  <div id="bandeaux" aria-live="polite"></div>
+  <main id="contenu" tabindex="-1"><p class="chargement">Chargement de l'édition…</p></main>
+  <footer class="pied">
+    <p>Info du Jour regroupe des articles de médias de sensibilités variées et en propose une synthèse neutre.
+      Les étiquettes d'orientation sont indicatives. Lisez toujours les articles d'origine.</p>
+  </footer>
+  <dialog id="dialogue"></dialog>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

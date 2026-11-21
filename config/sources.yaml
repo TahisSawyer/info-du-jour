@@ -1,0 +1,74 @@
+# Catalogue des sources d'Info du Jour
+# ------------------------------------------------------------------
+# orientation : gauche | centre-gauche | centre | centre-droit | droite
+#               | non-partisan (services publics, agences) | autre (regard non occidental, inclassable)
+# Les orientations sont INDICATIVES : elles résument une ligne éditoriale générale,
+# pas chaque article. Modifiez-les librement (toute modification est datée dans l'historique Git).
+# nature : generaliste | economique | service-public | independant | regional | magazine | radio-tv
+# payant : true si la plupart des articles sont réservés aux abonnés
+# region : france | europe | amerique-nord | amerique-latine | afrique | asie | moyen-orient | monde
+# actif : false pour désactiver une source sans la supprimer
+# Les adresses de flux sont vérifiées par le workflow « Vérifier les flux » (onglet Actions).
+
+sources:
+  # ---------------------------------------------------------------- France
+  - {id: franceinfo, nom: Franceinfo, pays: FR, langue: fr, region: france, nature: service-public, orientation: non-partisan, flux: "https://www.francetvinfo.fr/titres.rss"}
+  - {id: france24, nom: France 24, pays: FR, langue: fr, region: france, nature: service-public, orientation: non-partisan, flux: "https://www.france24.com/fr/rss"}
+  - {id: rfi, nom: RFI, pays: FR, langue: fr, region: france, nature: service-public, orientation: non-partisan, flux: "https://www.rfi.fr/fr/rss"}
+  - {id: 20minutes, nom: 20 Minutes, pays: FR, langue: fr, region: france, nature: generaliste, orientation: centre, flux: "https://www.20minutes.fr/feeds/rss-une.xml"}
+  - {id: ouestfrance, nom: Ouest-France, pays: FR, langue: fr, region: france, nature: regional, orientation: centre, flux: "https://www.ouest-france.fr/rss/une"}
+  - {id: lacroix, nom: La Croix, pays: FR, langue: fr, region: france, nature: generaliste, orientation: centre, payant: true, flux: "https://www.la-croix.com/RSS/UNIVERS"}
+  - {id: lexpress, nom: L'Express, pays: FR, langue: fr, region: france, nature: magazine, orientation: centre, payant: true, flux: "https://www.lexpress.fr/arc/outboundfeeds/rss/alaune.xml"}
+  - {id: leparisien, nom: Le Parisien, pays: FR, langue: fr, region: france, nature: generaliste, orientation: centre, flux: "https://feeds.leparisien.fr/leparisien/rss"}
+  - {id: bfmtv, nom: BFMTV, pays: FR, langue: fr, region: france, nature: radio-tv, orientation: centre, flux: "https://www.bfmtv.com/rss/news-24-7/"}
+  - {id: marianne, nom: Marianne, pays: FR, langue: fr, region: france, nature: magazine, orientation: centre, payant: true, flux: "https://www.marianne.net/rss.xml"}
+  - {id: lemonde, nom: Le Monde, pays: FR, langue: fr, region: france, nature: generaliste, orientation: centre-gauche, payant: true, flux: "https://www.lemonde.fr/rss/une.xml"}
+  - {id: lobs, nom: L'Obs, pays: FR, langue: fr, region: france, nature: magazine, orientation: centre-gauche, payant: true, flux: "https://www.nouvelobs.com/a-la-une/rss.xml"}
+  - {id: liberation, nom: Libération, pays: FR, langue: fr, region: france, nature: generaliste, orientation: gauche, payant: true, flux: "https://www.liberation.fr/arc/outboundfeeds/rss-all/collection/accueil-une/?outputType=xml"}
+  - {id: humanite, nom: L'Humanité, pays: FR, langue: fr, region: france, nature: generaliste, orientation: gauche, payant: true, flux: "https://www.humanite.fr/feed"}
+  - {id: mediapart, nom: Mediapart, pays: FR, langue: fr, region: france, nature: independant, orientation: gauche, payant: true, flux: "https://www.mediapart.fr/articles/feed"}
+  - {id: reporterre, nom: Reporterre, pays: FR, langue: fr, region: france, nature: independant, orientation: gauche, flux: "https://reporterre.net/spip.php?page=backend"}
+  - {id: altereco, nom: Alternatives Économiques, pays: FR, langue: fr, region: france, nature: economique, orientation: gauche, payant: true, flux: "https://www.alternatives-economiques.fr/rss.xml"}
+  - {id: lepoint, nom: Le Point, pays: FR, langue: fr, region: france, nature: magazine, orientation: centre-droit, payant: true, flux: "https://www.lepoint.fr/rss.xml"}
+  - {id: lopinion, nom: L'Opinion, pays: FR, langue: fr, region: france, nature: generaliste, orientation: centre-droit, payant: true, flux: "https://www.lopinion.fr/index.rss"}
+  - {id: lesechos, nom: Les Échos, pays: FR, langue: fr, region: france, nature: economique, orientation: centre-droit, payant: true, flux: "https://services.lesechos.fr/rss/les-echos-une.xml"}
+  - {id: latribune, nom: La Tribune, pays: FR, langue: fr, region: france, nature: economique, orientation: centre-droit, flux: "https://www.latribune.fr/feed.xml"}
+  - {id: lefigaro, nom: Le Figaro, pays: FR, langue: fr, region: france, nature: generaliste, orientation: droite, payant: true, flux: "https://www.lefigaro.fr/rss/figaro_actualites.xml"}
+  - {id: lejdd, nom: Le JDD, pays: FR, langue: fr, region: france, nature: generaliste, orientation: droite, flux: "https://www.lejdd.fr/rss.xml"}
+  - {id: valeurs, nom: Valeurs actuelles, pays: FR, langue: fr, region: france, nature: magazine, orientation: droite, payant: true, flux: "https://www.valeursactuelles.com/feed"}
+  - {id: europe1, nom: Europe 1, pays: FR, langue: fr, region: france, nature: radio-tv, orientation: droite, flux: "https://www.europe1.fr/rss.xml"}
+
+  # ---------------------------------------------------------- International
+  - {id: bbc, nom: BBC News, domaine: bbc.com, pays: GB, langue: en, region: europe, nature: service-public, orientation: non-partisan, flux: "https://feeds.bbci.co.uk/news/world/rss.xml"}
+  - {id: dw, nom: Deutsche Welle, domaine: dw.com, pays: DE, langue: en, region: europe, nature: service-public, orientation: non-partisan, flux: "https://rss.dw.com/rdf/rss-en-all"}
+  - {id: euronews, nom: Euronews, pays: EU, langue: fr, region: europe, nature: radio-tv, orientation: centre, flux: "https://fr.euronews.com/rss"}
+  - {id: politico, nom: Politico Europe, pays: EU, langue: en, region: europe, nature: generaliste, orientation: centre, flux: "https://www.politico.eu/feed/"}
+  - {id: letemps, nom: Le Temps, pays: CH, langue: fr, region: europe, nature: generaliste, orientation: centre, payant: true, flux: "https://www.letemps.ch/articles.rss"}
+  - {id: lesoir, nom: Le Soir, pays: BE, langue: fr, region: europe, nature: generaliste, orientation: centre, payant: true, flux: "https://www.lesoir.be/rss2/2/cible_principale"}
+  - {id: guardian, nom: The Guardian, pays: GB, langue: en, region: europe, nature: generaliste, orientation: centre-gauche, flux: "https://www.theguardian.com/world/rss"}
+  - {id: nyt, nom: The New York Times, pays: US, langue: en, region: amerique-nord, nature: generaliste, orientation: centre-gauche, payant: true, flux: "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"}
+  - {id: elpais, nom: El País, pays: ES, langue: es, region: europe, nature: generaliste, orientation: centre-gauche, flux: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada"}
+  - {id: spiegel, nom: Der Spiegel International, pays: DE, langue: en, region: europe, nature: magazine, orientation: centre-gauche, flux: "https://www.spiegel.de/international/index.rss"}
+  - {id: ft, nom: Financial Times, pays: GB, langue: en, region: europe, nature: economique, orientation: centre-droit, payant: true, flux: "https://www.ft.com/world?format=rss"}
+  - {id: economist, nom: The Economist, pays: GB, langue: en, region: europe, nature: magazine, orientation: centre-droit, payant: true, flux: "https://www.economist.com/international/rss.xml"}
+  - {id: wsj, nom: The Wall Street Journal, domaine: wsj.com, pays: US, langue: en, region: amerique-nord, nature: economique, orientation: centre-droit, payant: true, flux: "https://feeds.content.dowjones.io/public/rss/RSSWorldNews"}
+  - {id: telegraph, nom: The Telegraph, pays: GB, langue: en, region: europe, nature: generaliste, orientation: droite, payant: true, flux: "https://www.telegraph.co.uk/news/rss.xml"}
+  - {id: foxnews, nom: Fox News, pays: US, langue: en, region: amerique-nord, nature: radio-tv, orientation: droite, flux: "https://moxie.foxnews.com/google-publisher/world.xml"}
+
+  # ------------------------------------------- Autres régions du monde
+  - {id: aljazeera, nom: Al Jazeera English, pays: QA, langue: en, region: moyen-orient, nature: radio-tv, orientation: autre, flux: "https://www.aljazeera.com/xml/rss/all.xml"}
+  - {id: timesofisrael, nom: The Times of Israel, pays: IL, langue: en, region: moyen-orient, nature: generaliste, orientation: centre, flux: "https://www.timesofisrael.com/feed/"}
+  - {id: jeuneafrique, nom: Jeune Afrique, pays: FR, langue: fr, region: afrique, nature: magazine, orientation: centre, payant: true, flux: "https://www.jeuneafrique.com/feed/"}
+  - {id: lemondeafrique, nom: Le Monde Afrique, domaine: lemonde.fr/afrique, pays: FR, langue: fr, region: afrique, nature: generaliste, orientation: centre-gauche, payant: true, flux: "https://www.lemonde.fr/afrique/rss_full.xml"}
+  - {id: scmp, nom: South China Morning Post, pays: HK, langue: en, region: asie, nature: generaliste, orientation: autre, flux: "https://www.scmp.com/rss/91/feed"}
+  - {id: thehindu, nom: The Hindu, pays: IN, langue: en, region: asie, nature: generaliste, orientation: centre-gauche, flux: "https://www.thehindu.com/news/international/feeder/default.rss"}
+  - {id: elpaisamerica, nom: El País América, pays: ES, langue: es, region: amerique-latine, nature: generaliste, orientation: centre-gauche, flux: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/america/portada"}
+  - {id: folha, nom: Folha de S.Paulo, pays: BR, langue: pt, region: amerique-latine, nature: generaliste, orientation: centre, flux: "https://feeds.folha.uol.com.br/mundo/rss091.xml"}
+
+# Compléments par API (facultatifs : utilisés seulement si la clé correspondante est fournie
+# dans les secrets GitHub). Les articles dont le site figure dans le catalogue ci-dessus
+# reprennent l'orientation du catalogue ; les autres sont classés « autre ».
+api:
+  gnews: {actif: true, cle_env: GNEWS_API_KEY, requetes: [{lang: fr, country: fr}, {lang: en}]}
+  newsdata: {actif: true, cle_env: NEWSDATA_API_KEY, requetes: [{language: fr, country: fr}, {language: en}]}
+  guardian: {actif: true, cle_env: GUARDIAN_API_KEY}

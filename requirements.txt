@@ -1,0 +1,9 @@
+# Dépendances d'Info du Jour (Python 3.12)
+httpx>=0.27
+feedparser>=6.0
+pyyaml>=6.0
+pydantic>=2.6
+numpy>=1.26
+scikit-learn>=1.4
+# Modèle de regroupement multilingue au format ONNX (léger, sans PyTorch)
+fastembed>=0.4

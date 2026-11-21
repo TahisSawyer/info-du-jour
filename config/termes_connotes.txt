@@ -1,0 +1,27 @@
+# Termes évaluatifs ou connotés : s'ils apparaissent HORS guillemets dans un résumé IA,
+# le résumé est refusé et redemandé. Une expression par ligne, en minuscules.
+# Ajoutez-en au fil des signalements « Signaler un biais ».
+scandaleux
+scandaleuse
+honteux
+honteuse
+catastrophique
+désastreux
+désastreuse
+inadmissible
+inacceptable
+lamentable
+heureusement
+malheureusement
+courageux
+courageuse
+extrême-droite radicale
+gauchiste
+fasciste
+islamo-gauchiste
+woke
+ultra-libéral
+ultralibéral
+casseurs
+prise d'otage
+dictateur

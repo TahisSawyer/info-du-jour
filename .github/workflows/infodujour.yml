@@ -1,0 +1,168 @@
+# Info du Jour : collecte horaire, préparation, édition quotidienne, rattrapage IA et mise en ligne.
+# Un seul workflow, déclenché toutes les 30 minutes ; le script « planifier » décide quoi faire
+# selon l'heure de Paris (voir config/reglages.yaml). Le bouton « Rafraîchir » de l'application
+# le déclenche à la demande (workflow_dispatch).
+name: Info du Jour
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Que faire ?"
+        type: choice
+        default: edition
+        options: [edition, rattrapage, collecte, preparation]
+      forcer:
+        description: "Ignorer le délai minimal entre deux éditions (true/false)"
+        type: string
+        default: "false"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  actions: write
+
+# Une seule exécution à la fois : c'est le verrou qui empêche deux traitements simultanés.
+concurrency:
+  group: infodujour
+  cancel-in-progress: false
+
+env:
+  TZ: Europe/Paris
+  INFODUJOUR_ETAT: ${{ github.workspace }}/etat
+  FASTEMBED_CACHE_PATH: ${{ github.workspace }}/.cache-modeles
+
+jobs:
+  traitement:
+    name: Traitement
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      publier: ${{ steps.site.outputs.publier }}
+    env:
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+      NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
+      GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Récupération de l'état
+        run: |
+          mkdir -p etat
+          if git fetch --depth=1 origin etat 2>/dev/null; then
+            git archive FETCH_HEAD | tar -x -C etat
+            echo "État restauré ($(du -sh etat | cut -f1))"
+          else
+            echo "Première exécution : aucun état existant"
+          fi
+
+      - name: Planification
+        id: plan
+        env:
+          MODE_DEMANDE: ${{ inputs.mode }}
+          FORCER: ${{ inputs.forcer }}
+        run: |
+          pip install -q pyyaml
+          python -m infodujour planifier
+
+      - name: Maintien de la planification
+        # GitHub suspend les workflows planifiés d'un dépôt public sans activité pendant 60 jours :
+        # une réactivation quotidienne (sans commit) remet ce compteur à zéro.
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(date +%H)" = "09" ] && [ "$(date +%M)" -lt 30 ]; then
+            gh workflow enable infodujour.yml --repo "${{ github.repository }}" && echo "Planification maintenue"
+          fi
+
+      - name: Installation
+        if: steps.plan.outputs.collecte == 'true' || steps.plan.outputs.regroupement == 'true' || steps.plan.outputs.rattrapage == 'true'
+        run: pip install -q -r requirements.txt
+
+      - name: Cache du modèle de regroupement
+        if: steps.plan.outputs.collecte == 'true' || steps.plan.outputs.regroupement == 'true'
+        uses: actions/cache@v4
+        with:
+          path: .cache-modeles
+          key: modele-paraphrase-multilingual-v1
+
+      - name: Collecte
+        if: steps.plan.outputs.collecte == 'true'
+        run: python -m infodujour collecter
+
+      - name: Regroupement et classement
+        if: steps.plan.outputs.regroupement == 'true'
+        run: python -m infodujour regrouper --mode "${{ steps.plan.outputs.mode }}" --declenchement "${{ steps.plan.outputs.declenchement }}"
+
+      - name: Rédaction IA
+        if: steps.plan.outputs.regroupement == 'true'
+        run: python -m infodujour rediger
+
+      - name: Publication
+        id: publication
+        if: steps.plan.outputs.publication == 'true'
+        run: python -m infodujour publier
+
+      - name: Rattrapage IA
+        id: rattrapage
+        if: steps.plan.outputs.rattrapage == 'true'
+        run: python -m infodujour rattraper ${{ github.event_name == 'workflow_dispatch' && '--forcer' || '' }}
+
+      - name: Édition audio
+        if: steps.publication.outputs.publie == 'true'
+        continue-on-error: true
+        run: |
+          if python -c "import sys; from infodujour.config import reglages; sys.exit(0 if reglages()['audio']['actif'] else 1)"; then
+            pip install -q piper-tts && python -m infodujour audio
+          else
+            echo "Édition audio désactivée (config/reglages.yaml)"
+          fi
+
+      - name: Sauvegarde de l'état
+        if: always() && (steps.plan.outputs.collecte == 'true' || steps.plan.outputs.regroupement == 'true' || steps.plan.outputs.rattrapage == 'true')
+        run: |
+          cd etat
+          rm -rf travail voix
+          git init -q -b etat
+          git config user.name "Info du Jour"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "État du $(date '+%Y-%m-%d %H:%M')"
+          # un seul commit, remplacé à chaque fois : le dépôt ne grossit pas
+          git push -q --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" etat:etat
+
+      - name: Assemblage du site
+        id: site
+        if: steps.publication.outputs.publie == 'true' || steps.rattrapage.outputs.modifie == 'true'
+        run: |
+          python -m infodujour site --sortie _site
+          echo "publier=true" >> "$GITHUB_OUTPUT"
+
+      - name: Envoi du site
+        if: steps.site.outputs.publier == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  mise_en_ligne:
+    name: Mise en ligne
+    needs: traitement
+    if: needs.traitement.outputs.publier == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v4

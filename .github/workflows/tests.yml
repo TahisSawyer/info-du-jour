@@ -1,0 +1,26 @@
+# Lance les tests automatiques à chaque modification du code.
+name: Tests
+
+on:
+  push:
+    branches: [main]
+    paths: ["infodujour/**", "config/**", "tests/**", "requirements*.txt"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -q httpx feedparser pyyaml pydantic numpy scikit-learn pytest
+      - run: python -m pytest -q tests
