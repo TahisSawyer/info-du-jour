@@ -42,6 +42,9 @@ jobs:
     timeout-minutes: 45
     outputs:
       publier: ${{ steps.site.outputs.publier }}
+      notifier: ${{ steps.publication.outputs.publie }}
+      titre: ${{ steps.message.outputs.titre }}
+      texte: ${{ steps.message.outputs.texte }}
     env:
       MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -151,6 +154,11 @@ jobs:
           python -m infodujour site --sortie _site
           echo "publier=true" >> "$GITHUB_OUTPUT"
 
+      - name: Message de notification
+        id: message
+        if: steps.publication.outputs.publie == 'true'
+        run: python -m infodujour message
+
       - name: Envoi du site
         if: steps.site.outputs.publier == 'true'
         uses: actions/upload-pages-artifact@v3
@@ -168,3 +176,17 @@ jobs:
     steps:
       - id: deploiement
         uses: actions/deploy-pages@v4
+
+      - name: Notification sur le téléphone
+        # Envoyée via ntfy.sh (gratuit) si le secret NTFY_SUJET est renseigné. Voir README.
+        if: needs.traitement.outputs.notifier == 'true'
+        env:
+          NTFY_SUJET: ${{ secrets.NTFY_SUJET }}
+          TITRE: ${{ needs.traitement.outputs.titre }}
+          TEXTE: ${{ needs.traitement.outputs.texte }}
+          ADRESSE: ${{ steps.deploiement.outputs.page_url }}
+        run: |
+          if [ -z "$NTFY_SUJET" ]; then echo "Notifications non configurées (secret NTFY_SUJET absent)"; exit 0; fi
+          curl -s -o /dev/null -w "ntfy : HTTP %{http_code}\n" \
+            -H "Title: $TITRE" -H "Tags: newspaper" -H "Click: $ADRESSE" -H "Priority: default" \
+            --data-binary "$TEXTE" "https://ntfy.sh/$NTFY_SUJET"

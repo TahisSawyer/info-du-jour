@@ -67,7 +67,13 @@ Lancez aussi une fois **Actions › Vérifier les flux › Run workflow**. Le ra
 ### 6. Installer l'application sur le téléphone
 Ouvrez l'adresse dans Chrome (Android) ou Safari (iPhone), puis choisissez **Ajouter à l'écran d'accueil**. L'application s'ouvre ensuite comme une application normale, même hors ligne avec la dernière édition.
 
-### 7. Activer le bouton « Rafraîchir » (facultatif)
+### 7. Recevoir une notification à chaque nouvelle édition (facultatif)
+1. Installez l'application gratuite **ntfy** (Android : Play Store ; iPhone : App Store).
+2. Dans ntfy, touchez **+** et abonnez-vous à un sujet au nom long et imprévisible (par exemple `batnews-` suivi de lettres au hasard) : ce nom sert de mot de passe.
+3. Sur GitHub, créez le secret `NTFY_SUJET` avec ce nom exact (**Settings › Secrets and variables › Actions**).
+À chaque édition publiée (planifiée ou lancée par le bouton « Rafraîchir »), une notification arrive ; la toucher ouvre Bat News.
+
+### 8. Activer le bouton « Rafraîchir » (facultatif)
 Le bouton demande à GitHub de lancer une édition tout de suite. Il lui faut un jeton d'accès limité à ce seul dépôt :
 1. Sur GitHub, cliquez sur votre photo puis **Settings › Developer settings › Personal access tokens › Fine-grained tokens › Generate new token**.
 2. Remplissez le formulaire :

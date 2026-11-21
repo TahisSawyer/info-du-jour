@@ -202,3 +202,28 @@ dialog::backdrop { background: rgba(10, 15, 20, .45); }
   .bouton-plein span { display: none; }
   .repartition .ligne { grid-template-columns: 100px 1fr 40px; }
 }
+
+/* ---------------------------------------------------------------- cartes repliables (titre seul, résumé au toucher) */
+.carte { padding: 0; }
+.carte-titre { width: 100%; display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: none; border: 0;
+  color: inherit; text-align: left; cursor: pointer; border-radius: var(--rayon); }
+.carte-titre .rang { margin-top: 2px; }
+.carte-titre-texte { flex: 1; min-width: 0; }
+.carte-titre .titre { display: block; font: 700 1.08rem/1.3 var(--titre); }
+.carte-titre .badges { margin-bottom: 6px; }
+.carte-chevron { font-size: 1.5rem; line-height: 1; color: var(--encre-3); transition: transform .2s; margin-top: 2px; }
+.carte.depliee .carte-chevron { transform: rotate(90deg); }
+.carte-corps { padding: 0 16px 14px 16px; }
+.carte-titre .rang + .carte-titre-texte ~ .carte-chevron { }
+.deja-lu { display: inline-block; margin-top: 4px; font-size: .75rem; color: var(--encre-3); }
+/* ---------------------------------------------------------------- l'essentiel en liste */
+.essentiel ul { margin: 0; padding-left: 1.1em; }
+.essentiel li { margin: 0 0 .55em; font-family: var(--titre); font-size: 1.04rem; }
+.essentiel li::marker { content: "– "; color: var(--accent); }
+/* ---------------------------------------------------------------- équilibre en barres horizontales */
+.equilibre { display: grid; gap: 6px; margin: 8px 0; }
+.eq-ligne { display: grid; grid-template-columns: 58px 1fr; align-items: center; gap: 8px; }
+.eq-date { font-size: .8rem; color: var(--encre-3); text-align: right; }
+.eq-barre { display: flex; height: 22px; border-radius: 5px; overflow: hidden; background: var(--surface-2); }
+.eq-barre .seg { display: flex; align-items: center; justify-content: center; color: #fff; font-size: .72rem; font-weight: 600; }
+.eq-barre .b-centre { color: #1d2733; }

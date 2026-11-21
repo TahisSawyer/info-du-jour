@@ -60,10 +60,10 @@ Réponds uniquement avec un objet JSON de la forme :
   "points_de_vue": [{"position": "...", "synthese": "...", "sources": ["S1"]}],
   "limites": "", "evolution": ""}]}"""
 
-CONSIGNE_ESSENTIEL = """Tu es rédacteur dans une agence de presse. À partir des titres et résumés fournis,
-rédige en français « L'essentiel du jour » : 4 à 6 phrases factuelles et neutres, une par sujet important,
-dans l'ordre donné, sans adjectif évaluatif ni opinion, sans rien ajouter aux textes fournis.
-Réponds uniquement avec un objet JSON : {"texte": "..."}"""
+CONSIGNE_ESSENTIEL = """Tu es rédacteur dans une agence de presse. Pour chaque sujet fourni, dans l'ordre donné,
+écris en français UNE phrase factuelle et neutre (25 à 45 mots) qui résume l'essentiel du sujet, sans adjectif
+évaluatif ni opinion, sans rien ajouter aux textes fournis. Une opinion ou une affirmation contestée est attribuée
+à son auteur. Réponds uniquement avec un objet JSON : {"points": ["phrase du sujet 1", "phrase du sujet 2", ...]}"""
 
 
 class PointDeVue(BaseModel):
@@ -453,7 +453,8 @@ class Redacteur:
             s.setdefault("_motif", self.motif_absence())
         return non_traites
 
-    def essentiel(self, sujets: list[dict]) -> str | None:
+    def essentiel(self, sujets: list[dict]) -> list[str] | None:
+        """Une phrase par sujet, pour la liste à puces « L'essentiel » (France ou International)."""
         if not sujets or not self.actif or not self.disponible():
             return None
         entree = [{"titre": s["titre"], "resume": re.sub(_REFS, "", s["resume"]).strip()} for s in sujets]
@@ -461,10 +462,19 @@ class Redacteur:
             reponse, _, _ = self.demander("tops", CONSIGNE_ESSENTIEL, json.dumps(entree, ensure_ascii=False))
         except ErreurIA:
             return None
-        if isinstance(reponse, list):
-            reponse = reponse[0] if reponse and isinstance(reponse[0], dict) else {"texte": " ".join(map(str, reponse))}
-        texte = str(reponse.get("texte", "") if isinstance(reponse, dict) else reponse).strip()
-        normal = normaliser_mots(hors_guillemets(texte))
-        if len(texte) < 80 or any(contient_terme(normal, t) for t in termes_connotes()):
+        except Exception as exc:  # garde-fou
+            log.warning("Essentiel : erreur inattendue %s", exc)
             return None
-        return texte
+        if isinstance(reponse, dict):
+            points = reponse.get("points") or reponse.get("texte") or []
+        else:
+            points = reponse
+        if isinstance(points, str):
+            points = phrases(points) or [points]
+        points = [re.sub(_REFS, "", str(p)).strip(" -•") for p in points if str(p).strip()]
+        if len(points) < max(1, len(sujets) - 1):
+            return None
+        for p in points:
+            if len(p) < 25 or any(contient_terme(normaliser_mots(hors_guillemets(p)), t) for t in termes_connotes()):
+                return None
+        return points[: len(sujets)]

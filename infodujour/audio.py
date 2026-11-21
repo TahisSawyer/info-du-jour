@@ -21,9 +21,11 @@ log = logging.getLogger(__name__)
 
 def texte_a_lire(edition: dict) -> str:
     morceaux = [f"Bat News, édition du {edition['date']}."]
-    ess = (edition.get("essentiel") or {}).get("texte")
-    if ess:
-        morceaux += ["L'essentiel.", sans_references(ess)]
+    ess = edition.get("essentiel") or {}
+    for perimetre, titre in (("france", "L'essentiel en France."), ("international", "L'essentiel à l'international.")):
+        points = (ess.get(perimetre) or {}).get("points") or []
+        if points:
+            morceaux += [titre] + [sans_references(p) for p in points]
     for perimetre, titre in (("france", "En France."), ("international", "À l'international.")):
         morceaux.append(titre)
         for sid in edition["tops"][perimetre][:5]:

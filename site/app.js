@@ -113,23 +113,36 @@ function carte(s, rang) {
   const surligne = correspondMotsCles(s);
   const reprises = s.depeches ? ` · dont ${s.depeches} reprise${s.depeches > 1 ? "s" : ""} de dépêche` : "";
   return `
-  <article class="carte${surligne ? " surlignee" : ""}${dejaLu ? " repliee" : ""}" data-id="${s.id}">
-    <div class="carte-tete">
-      ${rang ? `<div class="rang" aria-hidden="true">${rang}</div>` : ""}
-      <div style="flex:1;min-width:0">
+  <article class="carte${surligne ? " surlignee" : ""}" data-id="${s.id}">
+    <button class="carte-titre" type="button" aria-expanded="false" aria-controls="corps-${s.id}">
+      ${rang ? `<span class="rang" aria-hidden="true">${rang}</span>` : ""}
+      <span class="carte-titre-texte">
         ${badges(s)}
-        <h3><a href="#/sujet/${s.id}">${esc(s.titre)}</a></h3>
-        ${dejaLu ? `<p class="evolution">Déjà lu. ${s.evolution ? "Ce qui a changé : " + esc(s.evolution) : ""} <button class="bouton bouton-discret deplier" type="button">Afficher</button></p>`
-                 : (s.evolution ? `<p class="evolution"><strong>Ce qui a changé :</strong> ${esc(s.evolution)}</p>` : "")}
-        <p class="resume">${avecRenvois(s.resume, s.id)}</p>
-        ${barreBords(s)}
-        <div class="carte-pied">
-          <span>${s.nb_medias} média${s.nb_medias > 1 ? "s" : ""}${reprises}</span>
-          <a href="#/sujet/${s.id}">Sources et points de vue →</a>
-        </div>
+        <span class="titre">${esc(s.titre)}</span>
+        ${dejaLu ? `<span class="deja-lu">Déjà lu</span>` : ""}
+      </span>
+      <span class="carte-chevron" aria-hidden="true">›</span>
+    </button>
+    <div class="carte-corps" id="corps-${s.id}" hidden>
+      ${s.evolution ? `<p class="evolution"><strong>Ce qui a changé :</strong> ${esc(s.evolution)}</p>` : ""}
+      <p class="resume">${avecRenvois(s.resume, s.id)}</p>
+      ${barreBords(s)}
+      <div class="carte-pied">
+        <span>${s.nb_medias} média${s.nb_medias > 1 ? "s" : ""}${reprises}</span>
+        <a href="#/sujet/${s.id}">Sources et points de vue →</a>
       </div>
     </div>
   </article>`;
+}
+
+function brancherCartes(racine) {
+  racine.querySelectorAll(".carte-titre").forEach((b) => b.addEventListener("click", () => {
+    const corps = b.parentElement.querySelector(".carte-corps");
+    const ouvrir = corps.hidden;
+    corps.hidden = !ouvrir;
+    b.setAttribute("aria-expanded", String(ouvrir));
+    b.parentElement.classList.toggle("depliee", ouvrir);
+  }));
 }
 
 function listeCartes(ids, numeroter = false) {
@@ -167,26 +180,34 @@ function bandeaux() {
   $("#charger-nouvelle")?.addEventListener("click", async () => { etat.nouvelle = false; await chargerDerniere(true); afficher(); });
 }
 
-function teteEdition(avecEssentiel = true) {
+function pointsEssentiel(e, perimetre) {
+  const ess = e.essentiel || {};
+  if (ess[perimetre]) return ess[perimetre];
+  if (ess.texte) {  // ancien format : un paragraphe, découpé en phrases
+    return { statut_ia: ess.statut_ia, points: ess.texte.split(/(?<=[.!?])\s+(?=[A-ZÀ-ÖØ-Þ«"])/).filter((p) => p.trim().length > 20) };
+  }
+  return null;
+}
+
+function teteEdition(perimetre = null) {
   const e = etat.edition;
-  const ess = avecEssentiel ? e.essentiel?.texte : "";
+  const ess = perimetre ? pointsEssentiel(e, perimetre) : null;
   return `
     <div class="tete-edition">
       <span class="date">${dateLongue(e.date)}</span>
       <span class="meta">Édition de ${heure(e.genere_le)}${e.declenchement === "manuel" ? " (rafraîchie à la demande)" : ""}${e.rattrape_le ? `, complétée à ${heure(e.rattrape_le)}` : ""} · ${e.stats.articles} articles de ${e.stats.medias_actifs} médias</span>
     </div>
-    ${ess ? `<section class="essentiel" aria-label="L'essentiel">
-      <h2>L'essentiel en 3 minutes ${e.essentiel.statut_ia === "ia" ? badgeIA({ statut_ia: "ia" }) : `<span class="badge badge-sans-ia" title="Titres des principaux sujets, sans synthèse IA">⚠ Sans IA</span>`}</h2>
-      <p>${avecRenvois(ess, "", false)}</p>
-      ${e.audio ? `<audio controls preload="none" src="donnees/${esc(e.audio)}"></audio>` : ""}
+    ${ess && ess.points?.length ? `<section class="essentiel" aria-label="L'essentiel">
+      <h2>L'essentiel ${perimetre === "france" ? "en France" : "à l'international"} ${ess.statut_ia === "ia" ? badgeIA({ statut_ia: "ia" }) : `<span class="badge badge-sans-ia" title="Titres des principaux sujets, sans synthèse IA">⚠ Sans IA</span>`}</h2>
+      <ul>${ess.points.map((p) => `<li>${avecRenvois(p, "", false)}</li>`).join("")}</ul>
+      ${e.audio && perimetre === "france" ? `<audio controls preload="none" src="donnees/${esc(e.audio)}"></audio>` : ""}
     </section>` : ""}`;
 }
 
 // ------------------------------------------------------------------ pages
 function pageAccueil(perimetre) {
   const e = etat.edition;
-  // « L'essentiel » n'apparaît que sur l'onglet France : sur International, le Top 10 s'affiche tout de suite
-  return `${teteEdition(perimetre === "france")}
+  return `${teteEdition(perimetre)}
     <h1>${perimetre === "france" ? "Top 10 France" : "Top 10 International"}</h1>
     ${listeCartes(e.tops[perimetre] || [], true)}`;
 }
@@ -215,9 +236,9 @@ function pageRubriques() {
       <div class="rub-contenu" id="rub-contenu-${r.id}" ${ouvert ? "" : "hidden"}>${listeCartes(r.sujets)}</div>
     </section>`;
   }).join("");
-  return `${teteEdition(false)}<h1>Rubriques</h1>
+  return `${teteEdition()}<h1>Rubriques</h1>
     <p class="intro">Touchez une rubrique pour afficher ses sujets, puis touchez-la de nouveau pour la refermer.
-    Les sujets déjà présents dans les Tops 10 n'y sont pas répétés. Ordre et affichage : <a href="#/reglages">Réglages</a>.</p>
+    Touchez ensuite un titre pour lire son résumé. Les sujets déjà présents dans les Tops 10 n'y sont pas répétés. Ordre et affichage : <a href="#/reglages">Réglages</a>.</p>
     <div class="rubriques-liste">${blocs || `<p class="vide">Aucune rubrique à afficher.</p>`}</div>`;
 }
 
@@ -314,22 +335,19 @@ function pageSujet(id, cle) {
 
 function graphiquePluralisme(series) {
   if (!series?.length) return `<p class="vide">L'historique se construit au fil des éditions.</p>`;
-  const L = 640, H = 170, g = 46, bas = 22, largeur = Math.min((L - g) / series.length, 36);
-  const barres = series.map((p, i) => {
+  const lignes = [...series].reverse().map((p) => {
     const total = BORDS.reduce((a, b) => a + (p.bords[b.id] || 0), 0) || 1;
-    let y = 8;
-    const h = H - bas - 8;
-    return BORDS.map((b) => {
-      const hh = (h * (p.bords[b.id] || 0)) / total;
-      const r = `<rect x="${g + i * largeur + 1}" y="${y}" width="${Math.max(largeur - 2, 1)}" height="${hh}" class="b-${b.id}" fill="var(--bord-${b.id})"><title>${p.date} — ${NOMS_BORDS_COURTS[b.id]} : ${Math.round((100 * (p.bords[b.id] || 0)) / total)} %</title></rect>`;
-      y += hh;
-      return r;
+    const parts = BORDS.map((b) => {
+      const pc = Math.round((100 * (p.bords[b.id] || 0)) / total);
+      return pc ? `<span class="seg b-${b.id}" style="width:${pc}%" title="${NOMS_BORDS_COURTS[b.id]} : ${pc} %">${pc >= 9 ? pc + " %" : ""}</span>` : "";
     }).join("");
+    const d = new Date(p.date + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+    return `<div class="eq-ligne"><span class="eq-date">${d}</span><span class="eq-barre" role="img"
+      aria-label="${d} : ${BORDS.map((b) => `${NOMS_BORDS_COURTS[b.id]} ${Math.round((100 * (p.bords[b.id] || 0)) / total)} %`).join(", ")}">${parts}</span></div>`;
   }).join("");
-  const axe = [0, 50, 100].map((v) => `<text x="${g - 6}" y="${8 + (H - bas - 8) * (1 - v / 100) + 4}" text-anchor="end">${v} %</text>`).join("");
-  const dates = [0, series.length - 1].filter((v, i, a) => a.indexOf(v) === i).map((i) => `<text x="${g + i * largeur + largeur / 2}" y="${H - 6}" text-anchor="middle">${series[i].date.slice(5)}</text>`).join("");
-  return `<div class="graphique"><svg viewBox="0 0 ${L} ${H}" role="img" aria-label="Part des liens affichés par sensibilité, par édition">${axe}${barres}${dates}</svg></div>
-    <p class="legende-bords" style="font-size:.85rem">${BORDS.map((b) => `<span><span class="puce b-${b.id}"></span>${b.nom}</span>`).join("")}</p>`;
+  return `<p class="legende-bords" style="font-size:.85rem;flex-wrap:wrap">${BORDS.map((b) => `<span><span class="puce b-${b.id}"></span>${b.nom}</span>`).join("")}</p>
+    <div class="equilibre">${lignes}</div>
+    <p class="aide">Part des liens affichés par sensibilité, édition la plus récente en haut. Un équilibre parfait serait proche d'un tiers chacun.</p>`;
 }
 
 function pageSources() {
@@ -346,7 +364,7 @@ function pageSources() {
     Chaque média compte pour une voix, quel que soit son nombre d'articles. Les orientations sont indicatives et modifiables.</p>
     <section class="bloc"><h2>Articles collectés sur 30 heures (${total})</h2><div class="repartition">${src.orientations.map((o) => `
       <div class="ligne"><span>${esc(o.libelle)}</span><span class="jauge"><span style="width:${(100 * (rep[o.id] || 0)) / max}%"></span></span><span>${rep[o.id] || 0}</span></div>`).join("")}</div></section>
-    <section class="bloc"><h2>Équilibre des liens affichés sur 30 éditions</h2>${graphiquePluralisme(etat.pluralisme)}
+    <section class="bloc"><h2>Équilibre des liens affichés (30 dernières éditions)</h2>${graphiquePluralisme(etat.pluralisme)}
       ${dernier?.alertes?.length ? `<p class="limites">Alerte d'équilibre : ${dernier.alertes.map(esc).join(" ; ")}</p>` : `<p class="intro" style="font-size:.88rem">Aucune alerte d'équilibre sur la dernière édition.</p>`}
       ${dernier ? `<p class="intro" style="font-size:.88rem">Dernière édition : diversité moyenne ${Math.round(dernier.diversite_moyenne * 100)} %, sujets à couverture partielle ${Math.round(dernier.part_couverture_partielle * 100)} %, sujets avec points de vue ${Math.round(dernier.part_points_de_vue * 100)} %.</p>` : ""}
     </section>
@@ -609,7 +627,7 @@ async function afficher() {
     $("#partager")?.addEventListener("click", () => navigator.share({ title: etat.edition.sujets[a1]?.titre, url: location.href }).catch(() => {}));
     if (!a2) window.scrollTo(0, 0);
   } else window.scrollTo(0, 0);
-  main.querySelectorAll(".deplier").forEach((b) => b.addEventListener("click", () => b.closest(".carte").classList.remove("repliee")));
+  brancherCartes(main);
 }
 
 async function chargerDerniere(frais = false) {

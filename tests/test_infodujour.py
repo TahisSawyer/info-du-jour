@@ -112,8 +112,10 @@ def test_edition_avec_ia_par_lots(etat, monkeypatch):
     total = e["couverture_ia"]["total"]
     assert e["statut_ia"] == "complet", [(s["titre"], s.get("motif_ia")) for s in e["sujets"].values()]
     # 5 sujets par appel : beaucoup moins d'appels que de sujets (+1 pour l'essentiel)
-    assert len(appels) <= -(-total // 5) + 2
-    assert e["essentiel"]["statut_ia"] == "ia"
+    assert len(appels) <= -(-total // 5) + 3  # + 2 appels pour l'essentiel (France, International)
+    for p in ("france", "international"):
+        assert e["essentiel"][p]["statut_ia"] == "ia"
+        assert len(e["essentiel"][p]["points"]) == len(e["tops"][p][:5])
     assert any(s["points_de_vue"] for s in e["sujets"].values())
 
 

@@ -118,16 +118,24 @@ def rediger() -> dict:
         extraction.remplir_sans_ia(s, s.pop("_motif", redacteur.motif_absence()))
     _memoriser_cache([sujets[i] for i in ordre])
     if travail["mode"] != "preparation":
-        tops = [sujets[i] for i in sel["tops"]["france"][:3] + sel["tops"]["international"][:2]]
-        texte = redacteur.essentiel([s for s in tops if s.get("statut_ia") == "ia"])
-        travail["essentiel"] = {"texte": texte, "statut_ia": "ia"} if texte else {
-            "texte": " ".join(f"{s['titre']}." for s in tops), "statut_ia": "sans_ia"}
+        travail["essentiel"] = {p: _essentiel(redacteur, [sujets[i] for i in sel["tops"][p][:5]])
+                                for p in ("france", "international")}
     travail["ia_bilan"] = {**redacteur.bilan, "reutilises": reutilises,
                            "rediges": sum(1 for i in ordre if sujets[i].get("statut_ia") == "ia")}
     stockage.ecrire_json(TRAVAIL, travail, compact=True)
     stockage.journaliser({"etape": f"redaction-{travail['mode']}", **travail["ia_bilan"],
                           "sans_ia": len(restants)})
     return travail
+
+
+def _essentiel(redacteur, tops: list[dict]) -> dict:
+    """« L'essentiel » d'un périmètre : une phrase par sujet du Top 5 (IA), à défaut les titres."""
+    points = None
+    if redacteur is not None and tops and all(s.get("statut_ia") == "ia" for s in tops):
+        points = redacteur.essentiel(tops)
+    if points:
+        return {"points": points, "statut_ia": "ia"}
+    return {"points": [s.get("titre", "") for s in tops if s.get("titre")], "statut_ia": "sans_ia"}
 
 
 # =================================================================== 3. publication
@@ -294,12 +302,16 @@ def rattraper(force: bool = False) -> bool:
         s["motif_ia"] = motif
         s["statut_ia"] = "sans_ia" if (dernier_passage or motif not in _MOTIFS_RATTRAPABLES) else "en_attente"
     rattrapes = len(cibles) - len(restants)
-    if edition.get("essentiel", {}).get("statut_ia") != "ia":
-        tops = [edition["sujets"][i] for i in edition["tops"]["france"][:3] + edition["tops"]["international"][:2]]
-        if all(s.get("statut_ia") == "ia" for s in tops):
-            texte = redacteur.essentiel(tops)
-            if texte:
-                edition["essentiel"] = {"texte": texte, "statut_ia": "ia"}
+    ess = edition.get("essentiel") or {}
+    if "france" not in ess:  # ancien format (un seul paragraphe) : on le remplace
+        ess = {}
+    for p in ("france", "international"):
+        tops = [edition["sujets"][i] for i in edition["tops"][p][:5]]
+        if (ess.get(p) or {}).get("statut_ia") != "ia" and all(s.get("statut_ia") == "ia" for s in tops):
+            ess[p] = _essentiel(redacteur, tops)
+        elif p not in ess:
+            ess[p] = _essentiel(None, tops)
+    edition["essentiel"] = ess
     statut, ia, total = _statut_edition(list(edition["sujets"].values()))
     edition["statut_ia"], edition["couverture_ia"] = statut, {"ia": ia, "total": total}
     edition["rattrape_le"] = stockage.iso(stockage.maintenant())

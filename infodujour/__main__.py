@@ -46,6 +46,30 @@ def _site(sortie: str) -> None:
     print(f"Site assemblé dans {dest}")
 
 
+def _message() -> None:
+    """Écrit dans GITHUB_OUTPUT le titre et le texte de la notification « édition disponible »."""
+    from datetime import date
+
+    e = stockage.lire_json("public/edition.json") or {}
+    if not e:
+        return
+    jours = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
+    mois = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre",
+            "novembre", "décembre"]
+    d = date.fromisoformat(e["date"])
+    titre = f"Bat News · {jours[d.weekday()]} {d.day} {mois[d.month - 1]}"
+    une = e["sujets"].get((e["tops"].get("france") or [""])[0], {}).get("titre", "")
+    ia = e.get("couverture_ia", {})
+    texte = f"Nouvelle édition disponible. À la une : {une}" if une else "Nouvelle édition disponible."
+    if ia and ia.get("ia") != ia.get("total"):
+        texte += f" (résumés IA : {ia.get('ia')}/{ia.get('total')})"
+    sortie = os.environ.get("GITHUB_OUTPUT")
+    if sortie:
+        with open(sortie, "a", encoding="utf-8") as f:
+            f.write(f"titre={titre}\ntexte={texte.replace(chr(10), ' ')}\n")
+    print(titre, "—", texte)
+
+
 def _verifier_flux() -> int:
     from .collecte import _lire_flux
     from .config import sources
@@ -93,6 +117,7 @@ def main(argv: list[str] | None = None) -> int:
     st = sp.add_parser("site")
     st.add_argument("--sortie", default="_site")
     sp.add_parser("verifier-flux")
+    sp.add_parser("message")
     a = p.parse_args(argv)
 
     if a.commande == "planifier":
@@ -144,6 +169,8 @@ def main(argv: list[str] | None = None) -> int:
         _site(a.sortie)
     elif a.commande == "verifier-flux":
         return _verifier_flux()
+    elif a.commande == "message":
+        _message()
     return 0
 
 

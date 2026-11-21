@@ -29,7 +29,7 @@ def fausse_ia(requete_json: dict, bords_par_cle=None) -> dict:
     contenu = requete_json["messages"][1]["content"].split("\n\nTa réponse précédente")[0]
     donnees = json.loads(contenu)
     if isinstance(donnees, list):  # essentiel
-        return {"texte": " ".join(f"{d['titre']}." for d in donnees) + " Les détails figurent dans chaque sujet de l'édition."}
+        return {"points": [f"Selon les médias, {d['titre'].lower()} : les faits sont détaillés dans le sujet." for d in donnees]}
     sortie = []
     for s in donnees["sujets"]:
         src = s["sources"]
