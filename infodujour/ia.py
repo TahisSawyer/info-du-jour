@@ -178,6 +178,7 @@ class Fournisseur:
     modeles_refuses: set = field(default_factory=set)
     appels: int = 0
     disponibles: list | None = None
+    extra: dict = field(default_factory=dict)
 
 
 class ErreurIA(Exception):
@@ -197,8 +198,9 @@ class Redacteur:
         for f in cfg.get("fournisseurs", []):
             cle = os.environ.get(f["cle_env"], "").strip()
             if cle:
-                self.fournisseurs.append(Fournisseur(f["nom"], f["url"], cle, f.get("intervalle_s", 2), f["modeles"]))
-        self.client = httpx.Client(timeout=90)
+                self.fournisseurs.append(Fournisseur(f["nom"], f["url"], cle, f.get("intervalle_s", 2), f["modeles"],
+                                                     extra=dict(f.get("parametres", {}) or {})))
+        self.client = httpx.Client(timeout=120)
         self.bilan = {"appels": 0, "rejets": 0, "fournisseurs": {}}
         self.dernier_motif = "indisponible"
 
@@ -219,8 +221,8 @@ class Redacteur:
         attente = f.intervalle - (time.time() - f.dernier_appel)
         if attente > 0:
             time.sleep(attente)
-        corps = {"model": modele, "temperature": self.temperature, "max_tokens": 4000,
-                 "response_format": {"type": "json_object"},
+        corps = {"model": modele, "temperature": self.temperature, "max_tokens": 6000,
+                 "response_format": {"type": "json_object"}, **f.extra,
                  "messages": [{"role": "system", "content": systeme}, {"role": "user", "content": contenu}]}
         for essai in range(3):
             if self.echeance and time.time() > self.echeance:
@@ -229,8 +231,10 @@ class Redacteur:
             try:
                 r = self.client.post(f.url, json=corps, headers={"Authorization": f"Bearer {f.cle}"})
             except httpx.HTTPError as exc:
-                log.warning("%s : erreur réseau %s", f.nom, exc)
-                time.sleep(5 * (essai + 1))
+                log.warning("%s · %s : erreur réseau %s", f.nom, modele, exc)
+                if essai >= 1:
+                    raise ErreurIA("surcharge", str(exc))
+                time.sleep(5)
                 continue
             f.appels += 1
             self.bilan["appels"] += 1
@@ -248,6 +252,12 @@ class Redacteur:
             if r.status_code in (401, 403):
                 f.hors_service = True
                 raise ErreurIA("indisponible", f"clé refusée ({r.status_code})")
+            if r.status_code == 400 and f.extra and any(k in r.text for k in f.extra):
+                # paramètre facultatif refusé par ce fournisseur : on le retire et on recommence
+                for k in list(f.extra):
+                    corps.pop(k, None)
+                f.extra = {}
+                continue
             if r.status_code in (400, 404, 422):
                 texte = r.text[:300].lower()
                 if "model" in texte or r.status_code == 404:
@@ -255,7 +265,9 @@ class Redacteur:
                     raise ErreurIA("modele", texte)
                 raise ErreurIA("requete", texte)
             if r.status_code >= 500:
-                time.sleep(5 * (essai + 1))
+                if essai >= 1:  # modèle saturé : on passe au modèle suivant plutôt que d'attendre
+                    raise ErreurIA("surcharge", f"HTTP {r.status_code}")
+                time.sleep(5)
                 continue
             try:
                 contenu = r.json()["choices"][0]["message"]["content"]
@@ -332,7 +344,7 @@ class Redacteur:
                     derniere = e
                     if e.nature == "modele":
                         continue
-                    if e.nature in ("format", "requete"):
+                    if e.nature in ("format", "requete", "surcharge"):
                         continue
                     if e.nature == "delai":
                         self.dernier_motif = "delai"
@@ -383,6 +395,7 @@ class Redacteur:
                     appliquer(sujet, sortie, fournisseur, modele)
                     continue
                 self.bilan["rejets"] += 1
+                log.info("Résumé refusé (%s) : %s", sujet["titre"][:60] if sujet.get("titre") else sujet["id"], "; ".join(defauts[:4]))
                 if sujet["id"] in refus:  # second refus
                     sujet["_motif"] = MOTIFS["non_conforme"]
                     non_traites.append(sujet)
