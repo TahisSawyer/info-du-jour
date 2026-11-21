@@ -17,7 +17,7 @@ Tout fonctionne sur les services gratuits de **GitHub**, sans serveur ni NAS :
 | Traitements (collecte, regroupement, IA) | GitHub Actions |
 | Stockage des données | Branche `etat` du dépôt |
 | Site et application | GitHub Pages |
-| Rédaction des résumés | Mistral (offre gratuite), Gemini en secours |
+| Rédaction des résumés | Gemini (offre gratuite) ; Mistral en option, payant à l'usage |
 
 ---
 
@@ -33,8 +33,8 @@ Tout fonctionne sur les services gratuits de **GitHub**, sans serveur ni NAS :
    > ⚠️ Le dossier `.github` est un dossier masqué sur Mac et Windows : vérifiez qu'il est bien envoyé. Sinon, créez à la main le fichier `.github/workflows/infodujour.yml` avec **Add file › Create new file** et collez-y son contenu. Faites de même pour les deux autres fichiers de ce dossier. Vous pouvez aussi utiliser l'application GitHub Desktop.
 
 ### 2. Obtenir les clés d'IA (gratuites)
-- **Mistral (principal)** : [console.mistral.ai](https://console.mistral.ai). Créez un compte, activez l'offre gratuite (vérification par téléphone), puis allez dans **API Keys › Create new key**.
-- **Gemini (secours)** : [aistudio.google.com](https://aistudio.google.com). Cliquez **Get API key › Create API key**.
+- **Gemini (principal, gratuit)** : [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey). Cliquez **Create API key**.
+- **Mistral (facultatif, payant à l'usage)** : depuis fin 2026, Mistral ne propose plus d'offre gratuite pour l'API ; il faut la formule *Pay-as-you-go* sur [console.mistral.ai](https://console.mistral.ai) (quelques centimes par jour pour cette application).
 - Facultatif, pour élargir la couverture : [GNews](https://gnews.io), [NewsData.io](https://newsdata.io) et [The Guardian Open Platform](https://open-platform.theguardian.com/access/).
 
 Sans aucune clé, l'application fonctionne quand même en mode sans IA : résumés par extraits et colonnes par bord, avec la pastille « Sans IA ».
