@@ -298,10 +298,13 @@ class Redacteur:
                 time.sleep(5)
                 continue
             try:
-                contenu = r.json()["choices"][0]["message"]["content"]
+                contenu = r.json()["choices"][0]["message"].get("content")
+                if not contenu:  # certains modèles « à raisonnement » ne renvoient aucun texte : on l'écarte
+                    f.modeles_refuses.add(modele)
+                    raise ValueError("réponse vide")
                 contenu = re.sub(r"^```(?:json)?|```$", "", contenu.strip()).strip()
                 return json.loads(contenu)
-            except (KeyError, IndexError, ValueError, TypeError) as exc:
+            except (KeyError, IndexError, ValueError, TypeError, AttributeError) as exc:
                 cle = f"{f.nom} réponse illisible"
                 self.bilan.setdefault("erreurs", {})[cle] = self.bilan.setdefault("erreurs", {}).get(cle, 0) + 1
                 raise ErreurIA("format", str(exc))
@@ -351,7 +354,8 @@ class Redacteur:
         if f.gratuit_seulement:  # OpenRouter : uniquement les modèles gratuits (« :free »), jamais payants
             # les modèles gratuits sont vite saturés (429) : on garde une réserve large de modèles « :free »
             auto = [m for m in dispo if m.endswith(":free") and not any(k in m for k in exclus)
-                    and m not in f.modeles_refuses and m not in gardes]
+                    and m not in f.modeles_refuses and m not in gardes
+                    and max([float(x) for x in re.findall(r"(\d+(?:\.\d+)?)b\b", m)] or [99]) >= 20]  # trop petits : résumés peu fiables
         else:
             auto = [m for m in dispo if any(k in m for k in ("flash", "small", "medium"))
                     and not any(k in m for k in exclus) and m not in f.modeles_refuses]
