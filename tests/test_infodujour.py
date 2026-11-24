@@ -337,3 +337,24 @@ def test_groq_identifiants_complets(monkeypatch):
     liste = {"data": [{"id": "openai/gpt-oss-120b"}, {"id": "llama-3.3-70b-versatile"}]}
     r.client = httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(200, json=liste)))
     assert r._candidats(r.fournisseurs[0], "tops")[:2] == ["openai/gpt-oss-120b", "llama-3.3-70b-versatile"]
+
+
+def test_rattrapage_avec_sujet_suivi_publie(etat, monkeypatch):
+    """Régression du 23/11 : dans l'édition publiée, « precedent » n'a plus de résumé ; le rattrapage ne doit pas planter."""
+    monkeypatch.setenv("MISTRAL_API_KEY", "test")
+    for v in ("GEMINI_API_KEY", "GROQ_API_KEY", "OPENROUTER_API_KEY"):
+        monkeypatch.delenv(v, raising=False)
+    monkeypatch.setattr("time.sleep", lambda s: None)
+    panne = {"active": True}
+    _brancher_fausse_ia(monkeypatch, lambda req, corps, n: httpx.Response(503) if panne["active"] else None)
+    _pipeline(etat)
+    e = json.loads((etat / "public" / "edition.json").read_text())
+    for s in e["sujets"].values():
+        s["suivi"], s["precedent"] = "suite", {"date": "2026-11-22", "titre": "Hier"}
+    (etat / "public" / "edition.json").write_text(json.dumps(e))
+    from infodujour import edition
+
+    panne["active"] = False
+    assert edition.rattraper(force=True)
+    e2 = json.loads((etat / "public" / "edition.json").read_text())
+    assert e2["statut_ia"] == "complet"

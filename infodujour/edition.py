@@ -114,6 +114,7 @@ def rediger() -> dict:
             a_rediger["tops" if sid in ids_tops else "rubriques"].append(s)
     restants = redacteur.rediger(a_rediger["tops"], "tops")
     restants += redacteur.rediger(a_rediger["rubriques"], "rubriques")
+    restants = _seconde_passe(redacteur, restants, ids_tops)
     for s in restants:
         extraction.remplir_sans_ia(s, s.pop("_motif", redacteur.motif_absence()))
     _memoriser_cache([sujets[i] for i in ordre])
@@ -126,6 +127,24 @@ def rediger() -> dict:
     stockage.journaliser({"etape": f"redaction-{travail['mode']}", **travail["ia_bilan"],
                           "sans_ia": len(restants)})
     return travail
+
+
+def _seconde_passe(redacteur, restants: list[dict], ids_tops) -> list[dict]:
+    """Les modèles gratuits sont souvent saturés quelques minutes : si des sujets ont échoué pour cette
+    raison et qu'il reste du temps, on attend une minute et on retente une fois."""
+    a_retenter = [s for s in restants if s.get("_motif") == MOTIFS["indisponible"]]
+    if not a_retenter or not redacteur.echeance or redacteur.echeance - time.time() < 240:
+        return restants
+    log.info("Seconde passe sur %s sujets après une pause d'une minute", len(a_retenter))
+    time.sleep(60)
+    for f in redacteur.fournisseurs:
+        f.epuise = f.epuise and bool(f.modeles_refuses)  # une saturation passagère ne doit pas écarter le fournisseur
+    autres = [s for s in restants if s not in a_retenter]
+    for s in a_retenter:
+        s.pop("_motif", None)
+    encore = redacteur.rediger([s for s in a_retenter if s["id"] in ids_tops], "tops")
+    encore += redacteur.rediger([s for s in a_retenter if s["id"] not in ids_tops], "rubriques")
+    return autres + encore
 
 
 def _essentiel(redacteur, tops: list[dict]) -> dict:
@@ -297,6 +316,7 @@ def rattraper(force: bool = False) -> bool:
     redacteur = Redacteur(echeance=time.time() + 12 * 60)
     restants = redacteur.rediger([s for s in cibles if s["id"] in ids_tops], "tops")
     restants += redacteur.rediger([s for s in cibles if s["id"] not in ids_tops], "rubriques")
+    restants = _seconde_passe(redacteur, restants, ids_tops)
     for s in restants:
         motif = s.pop("_motif", redacteur.motif_absence())
         s["motif_ia"] = motif

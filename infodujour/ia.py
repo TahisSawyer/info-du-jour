@@ -178,8 +178,9 @@ def entree_ia(sujet: dict, cle_locale: str) -> dict:
         extraits.append({"cle": s["cle"], "media": s["media"], "orientation": s["orientation_libelle"],
                          "type": nature, "langue": s["langue"], "titre": s["titre"], "chapo": s["chapo"][:400]})
     entree = {"id": cle_locale, "sources": extraits}
-    if sujet.get("precedent"):
-        entree["resume_precedent"] = sujet["precedent"]["resume"][:500]
+    resume_precedent = (sujet.get("precedent") or {}).get("resume")
+    if resume_precedent:
+        entree["resume_precedent"] = resume_precedent[:500]
     return entree
 
 
@@ -271,6 +272,8 @@ class Redacteur:
                 continue
             if r.status_code >= 400:
                 log.warning("%s · %s : HTTP %s %s", f.nom, modele, r.status_code, r.text[:300].replace("\n", " "))
+                cle = f"{f.nom} HTTP {r.status_code}"
+                self.bilan.setdefault("erreurs", {})[cle] = self.bilan.setdefault("erreurs", {}).get(cle, 0) + 1
             if r.status_code in (401, 403):
                 f.hors_service = True
                 raise ErreurIA("indisponible", f"clé refusée ({r.status_code})")
@@ -296,6 +299,8 @@ class Redacteur:
                 contenu = re.sub(r"^```(?:json)?|```$", "", contenu.strip()).strip()
                 return json.loads(contenu)
             except (KeyError, IndexError, ValueError, TypeError) as exc:
+                cle = f"{f.nom} réponse illisible"
+                self.bilan.setdefault("erreurs", {})[cle] = self.bilan.setdefault("erreurs", {}).get(cle, 0) + 1
                 raise ErreurIA("format", str(exc))
         raise ErreurIA("indisponible", "trop d'erreurs")
 
@@ -406,7 +411,12 @@ class Redacteur:
                 lot = lot[:1]
             restants = restants[len(lot):]
             locales = {f"T{k}": s for k, s in enumerate(lot, 1)}
-            entree = {"sujets": [entree_ia(s, c) for c, s in locales.items()]}
+            try:
+                entree = {"sujets": [entree_ia(s, c) for c, s in locales.items()]}
+            except Exception as exc:  # garde-fou : un sujet mal formé ne doit jamais bloquer la suite
+                log.warning("Entrée IA impossible à préparer : %s", exc)
+                non_traites.extend(lot)
+                continue
             message = json.dumps(entree, ensure_ascii=False)
             if len(lot) == 1 and lot[0]["id"] in refus:
                 message += "\n\nTa réponse précédente pour ce sujet a été refusée. Corrige : " + "; ".join(refus[lot[0]["id"]])
