@@ -202,6 +202,9 @@ def test_validation_source_inventee():
 @pytest.mark.parametrize("heure,attendu", [
     ((9, 7), {"collecte": True, "regroupement": False}),
     ((15, 7), {"collecte": True, "mode": "preparation"}),
+    ((15, 36), {"collecte": True, "mode": "preparation"}),
+    ((16, 41), {"collecte": True, "mode": "preparation"}),
+    ((12, 50), {"collecte": True, "regroupement": False}),
     ((17, 37), {"collecte": True, "mode": "edition", "publication": True}),
     ((23, 7), {"collecte": False, "regroupement": False}),
 ])

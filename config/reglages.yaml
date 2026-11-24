@@ -6,7 +6,8 @@ fuseau: Europe/Paris
 planning:
   collecte_debut: "06:00"        # pas de collecte la nuit
   collecte_fin: "22:00"
-  preparation: ["15:00", "16:00"] # résumés IA préparés à l'avance pour les sujets qui montent
+  preparation: ["13:00", "14:00", "15:00", "16:00"] # résumés IA préparés à l'avance (Gemini moins saturé)
+  duree_preparation_min: 60      # créneaux d'une heure : GitHub déclenche ~1 fois/heure à minute variable
   edition: "17:30"               # lancement de l'édition (publication vers 17h45-17h55)
   rattrapage_fin: "22:00"        # relance de l'IA sur les sujets « Sans IA » jusqu'à cette heure
   rattrapage_auto: true
@@ -52,7 +53,7 @@ ia:
       url: https://generativelanguage.googleapis.com/v1beta/openai/chat/completions
       cle_env: GEMINI_API_KEY
       intervalle_s: 13
-      modeles: {tops: [gemini-3.6-flash, gemini-3.5-flash-lite, gemini-3.5-flash], rubriques: [gemini-3.5-flash-lite, gemini-3.1-flash-lite, gemini-3.6-flash]}
+      modeles: {tops: [gemini-3.6-flash, gemini-3.5-flash-lite, gemini-3.5-flash], rubriques: [gemini-3.5-flash-lite, gemini-3.1-flash-lite, gemini-3.5-flash, gemini-3.6-flash]}
       parametres: {reasoning_effort: low}   # réflexion courte : réponses plus rapides (retiré si refusé)
     # Secours gratuit n° 1 : Groq (sans carte bancaire ; quotas par modèle et par jour)
     - nom: Groq

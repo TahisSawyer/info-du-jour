@@ -199,6 +199,7 @@ class Fournisseur:
     disponibles: list | None = None
     extra: dict = field(default_factory=dict)
     gratuit_seulement: bool = False
+    annonce: bool = False
 
 
 class ErreurIA(Exception):
@@ -262,6 +263,8 @@ class Redacteur:
             self.bilan["fournisseurs"][f.nom] = f.appels
             self._lire_quota(f, r.headers)
             if r.status_code == 429:
+                cle = f"{f.nom} HTTP 429"
+                self.bilan.setdefault("erreurs", {})[cle] = self.bilan.setdefault("erreurs", {}).get(cle, 0) + 1
                 # le quota gratuit est souvent compté par modèle : on écarte ce modèle et on essaie le suivant
                 attente = float(r.headers.get("retry-after", 0) or 0) or 20 * (essai + 1)
                 quotidien = any(k in r.text.lower() for k in ("perday", "per day", "daily", "per_day"))
@@ -341,14 +344,14 @@ class Redacteur:
         if not dispo:
             return voulus
         gardes = [m for m in voulus if m in dispo]
-        if gardes:
+        if gardes and not f.gratuit_seulement:
             return gardes
         exclus = ("image", "tts", "live", "audio", "embed", "vision", "imagen", "veo", "omni", "robotics",
                   "computer", "preview", "exp", "thinking", "translate", "ocr", "moderation", "codestral")
         if f.gratuit_seulement:  # OpenRouter : uniquement les modèles gratuits (« :free »), jamais payants
+            # les modèles gratuits sont vite saturés (429) : on garde une réserve large de modèles « :free »
             auto = [m for m in dispo if m.endswith(":free") and not any(k in m for k in exclus)
-                    and any(k in m for k in ("instruct", "chat", "gpt-oss", "llama", "qwen", "mistral", "gemma"))
-                    and m not in f.modeles_refuses]
+                    and m not in f.modeles_refuses and m not in gardes]
         else:
             auto = [m for m in dispo if any(k in m for k in ("flash", "small", "medium"))
                     and not any(k in m for k in exclus) and m not in f.modeles_refuses]
@@ -362,6 +365,12 @@ class Redacteur:
             return (leger if niveau == "tops" else not leger, -nombres[0])
 
         auto.sort(key=cle_tri)
+        if f.gratuit_seulement:
+            choix = (gardes + auto)[:8]
+            if choix and not f.annonce:
+                f.annonce = True
+                log.info("%s : modèles gratuits retenus : %s", f.nom, choix)
+            return choix
         if auto:
             log.info("%s : modèles configurés absents, choix automatique : %s", f.nom, auto[:3])
         return auto[:3]

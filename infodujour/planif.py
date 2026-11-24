@@ -56,8 +56,9 @@ def decider(evenement: str, mode_demande: str = "", forcer: bool = False,
         return d
 
     # ------------------------------------------------------------ déclenchement planifié
-    demi_heure = now.minute < 30
-    if _entre(now, p.get("collecte_debut", "06:00"), p.get("collecte_fin", "22:00")) and demi_heure:
+    # GitHub déclenche en pratique environ une fois par heure, à une minute variable :
+    # on collecte donc à chaque passage en journée (et non plus seulement sur les demi-heures paires).
+    if _entre(now, p.get("collecte_debut", "06:00"), p.get("collecte_fin", "22:00")):
         d["collecte"] = True
     if _dans_creneau(now, p.get("edition", "17:30")):
         d.update(collecte=True, regroupement=True, mode="edition", publication=True)
@@ -68,7 +69,9 @@ def decider(evenement: str, mode_demande: str = "", forcer: bool = False,
         d.update(collecte=True, regroupement=True, mode="edition", publication=True,
                  message="Créneau d'édition manqué : édition de rattrapage")
         return d
-    if any(_dans_creneau(now, c) for c in p.get("preparation", [])):
+    # créneaux de préparation d'une heure, pour qu'un déclenchement tardif (ex. 15 h 36) ne les manque pas
+    duree_prep = p.get("duree_preparation_min", 60)
+    if not apres_edition and any(_dans_creneau(now, c, duree_prep) for c in p.get("preparation", [])):
         d.update(collecte=True, regroupement=True, mode="preparation")
         return d
     fin = p.get("rattrapage_fin", "22:00")
