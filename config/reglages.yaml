@@ -6,9 +6,9 @@ fuseau: Europe/Paris
 planning:
   collecte_debut: "06:00"        # pas de collecte la nuit
   collecte_fin: "22:00"
-  preparation: ["13:00", "14:00", "15:00", "16:00"] # résumés IA préparés à l'avance (Gemini moins saturé)
+  preparation: ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"] # résumés IA préparés au fil de la journée, hors pic de saturation
   duree_preparation_min: 60      # créneaux d'une heure : GitHub déclenche ~1 fois/heure à minute variable
-  edition: "17:30"               # lancement de l'édition (publication vers 17h45-17h55)
+  edition: "18:00"               # lancement de l'édition (prête en général entre 18 h 15 et 19 h)
   rattrapage_fin: "22:00"        # relance de l'IA sur les sujets « Sans IA » jusqu'à cette heure
   rattrapage_auto: true
   delai_min_rafraichissement_min: 30   # délai minimal entre deux rafraîchissements manuels

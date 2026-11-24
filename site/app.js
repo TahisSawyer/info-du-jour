@@ -152,6 +152,32 @@ function listeCartes(ids, numeroter = false) {
 }
 
 // ------------------------------------------------------------------ bandeaux
+function parisMaintenant() {
+  const d = new Date();
+  return {
+    jour: d.toLocaleDateString("sv-SE", { timeZone: "Europe/Paris" }),
+    minutes: (() => { const [h, m] = d.toLocaleTimeString("fr-FR", { timeZone: "Europe/Paris", hour: "2-digit", minute: "2-digit" }).split(":").map(Number); return h * 60 + m; })(),
+  };
+}
+
+// Mention de l'actualisation du jour : terminée (avec l'heure), en cours, ou à venir.
+function bandeauActualisation(e) {
+  if (!etat.derniere || e.id !== etat.derniere.id) return "";
+  const p = parisMaintenant();
+  const [hE, mE] = String(etat.config.heure_edition || "18:00").split(":").map(Number);
+  const debut = hE * 60 + mE;
+  const hh = (min) => `${Math.floor(min / 60)} h ${String(min % 60).padStart(2, "0")}`;
+  if (e.date === p.jour) {
+    const complete = e.statut_ia === "complet";
+    const fin = e.rattrape_le ? ` Résumés IA ${complete ? "complétés" : "mis à jour"} à ${heure(e.rattrape_le)}.` : "";
+    return `<div class="bandeau bandeau-ok" role="status"><span class="icone">✓</span><span><strong>Actualisation du jour terminée à ${heure(e.genere_le)}.</strong>${fin}</span></div>`;
+  }
+  if (p.minutes >= debut) {
+    return `<div class="bandeau bandeau-info" role="status"><span class="icone">↻</span><span><strong>Actualisation du jour en cours</strong> (lancée vers ${hh(debut)}, prête en général avant ${hh(debut + 60)}). En attendant, voici l'édition précédente.</span></div>`;
+  }
+  return `<div class="bandeau bandeau-info"><span class="icone">i</span><span>Prochaine actualisation aujourd'hui vers <strong>${hh(debut)}–${hh(debut + 60)}</strong>. Vous consultez l'édition précédente.</span></div>`;
+}
+
 function bandeaux() {
   const zone = $("#bandeaux");
   const e = etat.edition;
@@ -160,6 +186,8 @@ function bandeaux() {
   if (etat.derniere && e.id !== etat.derniere.id) {
     html.push(`<div class="bandeau bandeau-info"><span class="icone">i</span><span>Vous consultez l'édition archivée du <strong>${dateLongue(e.date)}</strong>.</span><a class="bouton" href="#/">Revenir au jour</a></div>`);
   }
+  const suivi = bandeauActualisation(e);
+  if (suivi) html.push(suivi);
   if (e.statut_ia === "partiel") {
     const attente = Object.values(e.sujets).some((s) => s.statut_ia === "en_attente");
     html.push(`<div class="bandeau bandeau-partiel" role="status"><span class="icone">!</span><span><strong>Traitement IA incomplet : ${e.couverture_ia.ia} sujets sur ${e.couverture_ia.total}.</strong>

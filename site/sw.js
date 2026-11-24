@@ -1,5 +1,5 @@
 // Service worker : l'application s'ouvre hors ligne et affiche la dernière édition téléchargée.
-const VERSION = "batnews-v4";
+const VERSION = "batnews-v5";
 const COQUILLE = ["./", "index.html", "style.css", "app.js", "manifest.webmanifest", "icones/favicon-32.png", "icones/icone-192.png", "icones/apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {

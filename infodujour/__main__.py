@@ -23,6 +23,7 @@ import sys
 from pathlib import Path
 
 from . import stockage
+from .config import reglages
 from .config import DOSSIER_ETAT, RACINE
 
 
@@ -41,6 +42,7 @@ def _site(sortie: str) -> None:
         "depot": depot,
         "workflow": "infodujour.yml",
         "branche": os.environ.get("GITHUB_REF_NAME", "main"),
+        "heure_edition": reglages()["planning"].get("edition", "18:00"),
     }, ensure_ascii=False), encoding="utf-8")
     (dest / ".nojekyll").write_text("")
     print(f"Site assemblé dans {dest}")

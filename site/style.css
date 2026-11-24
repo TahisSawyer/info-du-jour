@@ -76,6 +76,8 @@ main { max-width: 980px; margin: 0 auto; padding: 16px 16px 40px; outline: none;
 .bandeau-partiel { background: var(--attention-fond); border-color: var(--attention); color: var(--encre); }
 .bandeau-aucun { background: var(--neutre-fond); border-color: var(--encre-3); }
 .bandeau-info { background: var(--accent-fond); border-color: var(--accent); }
+.bandeau-ok { background: var(--accent-fond); border-color: var(--accent); }
+.bandeau-ok .icone { color: var(--accent); }
 .bandeau-erreur { background: var(--attention-fond); border-color: var(--critique); }
 .bandeau .icone { font-weight: 700; flex-shrink: 0; width: 1.3em; text-align: center; }
 

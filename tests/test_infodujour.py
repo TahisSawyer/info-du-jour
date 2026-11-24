@@ -204,8 +204,10 @@ def test_validation_source_inventee():
     ((15, 7), {"collecte": True, "mode": "preparation"}),
     ((15, 36), {"collecte": True, "mode": "preparation"}),
     ((16, 41), {"collecte": True, "mode": "preparation"}),
-    ((12, 50), {"collecte": True, "regroupement": False}),
-    ((17, 37), {"collecte": True, "mode": "edition", "publication": True}),
+    ((10, 50), {"collecte": True, "regroupement": False}),
+    ((17, 37), {"collecte": True, "mode": "preparation"}),
+    ((18, 7), {"collecte": True, "mode": "edition", "publication": True}),
+    ((11, 20), {"collecte": True, "mode": "preparation"}),
     ((23, 7), {"collecte": False, "regroupement": False}),
 ])
 def test_planification(etat, heure, attendu):
@@ -220,7 +222,7 @@ def test_planification(etat, heure, attendu):
 def test_planification_heure_ete(etat):
     from infodujour.planif import decider
 
-    d = decider("schedule", maintenant=datetime(2026, 7, 6, 17, 40, tzinfo=PARIS))
+    d = decider("schedule", maintenant=datetime(2026, 7, 6, 18, 10, tzinfo=PARIS))
     assert d["mode"] == "edition"
 
 
