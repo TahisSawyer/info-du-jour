@@ -363,3 +363,17 @@ def test_rattrapage_avec_sujet_suivi_publie(etat, monkeypatch):
     assert edition.rattraper(force=True)
     e2 = json.loads((etat / "public" / "edition.json").read_text())
     assert e2["statut_ia"] == "complet"
+
+
+def test_repli_sur_resume_prepare(etat):
+    from infodujour.edition import _reutiliser, _reutiliser_approche
+
+    cache = [{"article_ids": ["a1", "a2", "a3", "a4"], "titre": "T", "resume": "R [S1].", "controverse": False,
+              "points_de_vue": [], "limites": "", "evolution": "", "ia_modele": "m", "sources": [],
+              "cree_le": "2026-11-25T13:00:00Z"}]
+    sujet = {"article_ids": ["a1", "a2", "a3", "b1", "b2", "b3", "b4"]}  # le sujet a grossi depuis midi
+    assert not _reutiliser(dict(sujet), cache)
+    assert _reutiliser_approche(sujet, cache)
+    assert sujet["statut_ia"] == "ia" and sujet["resume_le"] == "2026-11-25T13:00:00Z"
+    autre = {"article_ids": ["z1", "z2", "a1"]}
+    assert not _reutiliser_approche(autre, cache)

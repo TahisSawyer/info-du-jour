@@ -77,6 +77,8 @@ ia:
       modeles: {tops: [mistral-medium-latest, mistral-small-latest], rubriques: [mistral-small-latest]}
   reutilisation_jaccard: 0.70    # un résumé est réutilisé si le sujet a peu changé
   reutilisation_nouveaux_max: 3
+  repli_couverture_min: 0.50     # IA saturée : reprise du résumé préparé plus tôt si le sujet est le même
+  repli_jaccard_min: 0.25
 
 pluralisme:
   alerte_part_max: 0.35          # alerte si une sensibilité dépasse 35 % des liens affichés

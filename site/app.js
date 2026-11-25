@@ -126,6 +126,7 @@ function carte(s, rang) {
     <div class="carte-corps" id="corps-${s.id}" hidden>
       ${s.evolution ? `<p class="evolution"><strong>Ce qui a changé :</strong> ${esc(s.evolution)}</p>` : ""}
       <p class="resume">${avecRenvois(s.resume, s.id)}</p>
+      ${s.resume_le ? `<p class="resume-date">Résumé rédigé à ${heure(s.resume_le)} : le sujet a pu évoluer depuis.</p>` : ""}
       ${barreBords(s)}
       <div class="carte-pied">
         <span>${s.nb_medias} média${s.nb_medias > 1 ? "s" : ""}${reprises}</span>

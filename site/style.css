@@ -229,3 +229,5 @@ dialog::backdrop { background: rgba(10, 15, 20, .45); }
 .eq-barre { display: flex; height: 22px; border-radius: 5px; overflow: hidden; background: var(--surface-2); }
 .eq-barre .seg { display: flex; align-items: center; justify-content: center; color: #fff; font-size: .72rem; font-weight: 600; }
 .eq-barre .b-centre { color: #1d2733; }
+
+.resume-date { font-size: .82rem; color: var(--encre-3); margin: -4px 0 8px; font-style: italic; }

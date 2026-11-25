@@ -60,19 +60,46 @@ def _jaccard(a: set, b: set) -> float:
     return len(a & b) / len(a | b) if a and b else 0.0
 
 
+def _appliquer_cache(sujet: dict, c: dict) -> None:
+    for cle in ("titre", "resume", "controverse", "points_de_vue", "limites", "evolution", "ia_modele", "sources"):
+        sujet[cle] = c[cle]
+    sujet["statut_ia"], sujet["motif_ia"] = "ia", ""
+    sujet["reutilise"] = True
+
+
 def _reutiliser(sujet: dict, cache: list[dict]) -> bool:
+    """Réutilisation stricte : le sujet n'a presque pas changé depuis le résumé mis en cache."""
     cfg = reglages()["ia"]
     ids = set(sujet["article_ids"])
     for c in cache:
         anciens = set(c["article_ids"])
         if _jaccard(ids, anciens) >= cfg.get("reutilisation_jaccard", 0.7) and \
                 len(ids - anciens) <= cfg.get("reutilisation_nouveaux_max", 3):
-            for cle in ("titre", "resume", "controverse", "points_de_vue", "limites", "evolution", "ia_modele", "sources"):
-                sujet[cle] = c[cle]
-            sujet["statut_ia"], sujet["motif_ia"] = "ia", ""
-            sujet["reutilise"] = True
+            _appliquer_cache(sujet, c)
             return True
     return False
+
+
+def _reutiliser_approche(sujet: dict, cache: list[dict]) -> bool:
+    """Solution de repli quand l'IA est saturée : on reprend le résumé préparé plus tôt dans la journée
+    pour ce même sujet (la majorité de ses articles d'alors y figurent encore), plutôt qu'un résumé
+    sans IA. Le résumé est daté pour que le lecteur sache qu'il a pu évoluer depuis."""
+    cfg = reglages()["ia"]
+    ids = set(sujet["article_ids"])
+    meilleur, score = None, 0.0
+    for c in cache:
+        anciens = set(c["article_ids"])
+        if not anciens:
+            continue
+        couverture = len(ids & anciens) / len(anciens)
+        j = _jaccard(ids, anciens)
+        if couverture >= cfg.get("repli_couverture_min", 0.5) and j >= cfg.get("repli_jaccard_min", 0.25) and j > score:
+            meilleur, score = c, j
+    if not meilleur:
+        return False
+    _appliquer_cache(sujet, meilleur)
+    sujet["resume_le"] = meilleur.get("cree_le", "")
+    return True
 
 
 def _memoriser_cache(sujets: list[dict]) -> None:
@@ -99,10 +126,9 @@ def rediger() -> dict:
     sujets = travail["sujets"]
     sel = travail["selection"]
     ids_tops = sel["tops"]["france"] + sel["tops"]["international"]
-    if travail["mode"] == "preparation":  # on prépare seulement les futurs Tops, sans publier
-        ordre = [i for i in sel["priorite"] if i in ids_tops][:16]
-    else:
-        ordre = sel["priorite"]
+    # la préparation rédige toute la future édition (Tops et rubriques), sans publier : les passages du
+    # matin et du midi profitent d'une IA peu chargée, l'édition du soir n'a plus qu'à compléter
+    ordre = sel["priorite"]
     cache = stockage.lire_json("cache_resumes.json", [])
     a_rediger = {"tops": [], "rubriques": []}
     reutilises = 0
@@ -115,9 +141,13 @@ def rediger() -> dict:
     restants = redacteur.rediger(a_rediger["tops"], "tops")
     restants += redacteur.rediger(a_rediger["rubriques"], "rubriques")
     restants = _seconde_passe(redacteur, restants, ids_tops)
+    _memoriser_cache([sujets[i] for i in ordre])
+    if travail["mode"] != "preparation":
+        repris = [s for s in restants if _reutiliser_approche(s, cache)]
+        reutilises += len(repris)
+        restants = [s for s in restants if s not in repris]
     for s in restants:
         extraction.remplir_sans_ia(s, s.pop("_motif", redacteur.motif_absence()))
-    _memoriser_cache([sujets[i] for i in ordre])
     if travail["mode"] != "preparation":
         travail["essentiel"] = {p: _essentiel(redacteur, [sujets[i] for i in sel["tops"][p][:5]])
                                 for p in ("france", "international")}
@@ -317,6 +347,9 @@ def rattraper(force: bool = False) -> bool:
     restants = redacteur.rediger([s for s in cibles if s["id"] in ids_tops], "tops")
     restants += redacteur.rediger([s for s in cibles if s["id"] not in ids_tops], "rubriques")
     restants = _seconde_passe(redacteur, restants, ids_tops)
+    if dernier_passage:  # dernier essai de la soirée : plutôt un résumé IA de l'après-midi qu'aucun
+        cache = stockage.lire_json("cache_resumes.json", [])
+        restants = [s for s in restants if not _reutiliser_approche(s, cache)]
     for s in restants:
         motif = s.pop("_motif", redacteur.motif_absence())
         s["motif_ia"] = motif
@@ -334,7 +367,8 @@ def rattraper(force: bool = False) -> bool:
     edition["essentiel"] = ess
     statut, ia, total = _statut_edition(list(edition["sujets"].values()))
     edition["statut_ia"], edition["couverture_ia"] = statut, {"ia": ia, "total": total}
-    edition["rattrape_le"] = stockage.iso(stockage.maintenant())
+    if rattrapes:
+        edition["rattrape_le"] = stockage.iso(stockage.maintenant())
     _ecrire_edition(edition)
     stockage.journaliser({"etape": "rattrapage", "rattrapes": rattrapes, "restants": len(restants), **redacteur.bilan})
     log.info("Rattrapage : %s sujets complétés, %s restants", rattrapes, len(restants))
