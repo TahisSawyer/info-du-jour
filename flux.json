@@ -1,0 +1,412 @@
+{
+ "franceinfo": {
+  "etag": "\"d7f1de9cc884b4f54621c19124e05a73-gzip\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 28
+ },
+ "france24": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 24
+ },
+ "rfi": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 23
+ },
+ "20minutes": {
+  "etag": "W/\"97a78ffee58473c57bb86ca05fadcc54\"",
+  "modifie": "Sat, 28 Nov 2026 14:59:37 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 25
+ },
+ "ouestfrance": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 10
+ },
+ "lacroix": {
+  "etag": "\"3e1b63da01acf14dbe1bb7d75fbe71c4\"",
+  "modifie": "Sat, 28 Nov 2026 15:10:18 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 49
+ },
+ "lexpress": {
+  "etag": "W/\"fb0f1-gcXbkhwh5ZsXHsxZsEcrbx3dMb4\"",
+  "modifie": "Sat, 28 Nov 2026 15:10:26 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 19
+ },
+ "leparisien": {
+  "etag": "W/\"8a25-LqcbPMSL4PldL+/gZDgTMeVl/uY\"",
+  "modifie": "Sat, 28 Nov 2026 15:12:30 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 100
+ },
+ "bfmtv": {
+  "etag": "W/\"ltQxB1dEFnAHK7/nI2DN1Dz11m8=\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 30
+ },
+ "lemonde": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 16
+ },
+ "lobs": {
+  "etag": "\"2378d85c816cea5ba06a375dde5e96e6\"",
+  "modifie": "Sat, 28 Nov 2026 15:15:02 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 37
+ },
+ "liberation": {
+  "etag": "W/\"4c8b-3fewRGsvpr9zMKFe5qhOU6ZsxBg\"",
+  "modifie": "Sat, 28 Nov 2026 15:14:01 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 20
+ },
+ "humanite": {
+  "etag": "W/\"4cba82c536e837e68fa50377e56ed78b\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 20
+ },
+ "mediapart": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 10
+ },
+ "reporterre": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 7
+ },
+ "altereco": {
+  "etag": "\"1795868402-gzip\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 5
+ },
+ "lepoint": {
+  "derniere_tentative": "2026-11-21T14:45:17Z",
+  "echecs": 1,
+  "erreur": "HTTP 403"
+ },
+ "lopinion": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 27
+ },
+ "lesechos": {
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 80,
+  "erreur": "HTTP 403"
+ },
+ "latribune": {
+  "etag": null,
+  "modifie": "Sat, 28 Nov 2026 15:14:49 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 20
+ },
+ "lefigaro": {
+  "etag": "W/\"71644736e8ebc1f3c4834b3f3d6449f9\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 20
+ },
+ "lejdd": {
+  "etag": null,
+  "modifie": "Sat, 28 Nov 2026 14:37:15 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 25
+ },
+ "valeurs": {
+  "etag": null,
+  "modifie": "Sat, 28 Nov 2026 15:10:20 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 10
+ },
+ "europe1": {
+  "etag": null,
+  "modifie": "Sat, 28 Nov 2026 15:17:45 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 50
+ },
+ "bbc": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 19
+ },
+ "dw": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 27
+ },
+ "euronews": {
+  "etag": "\"34522c869df1087fea39152dc47756a6-gzip\"",
+  "modifie": "Sat, 28 Nov 2026 15:14:27 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 50
+ },
+ "politico": {
+  "etag": "W/\"e62f994d54c1434480857b6d90f38d91\"",
+  "modifie": "Sat, 28 Nov 2026 14:33:30 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 10
+ },
+ "letemps": {
+  "etag": "W/\"65faf7d9d18268fc356cd07ccaa526c5\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 21
+ },
+ "lesoir": {
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 80,
+  "erreur": "HTTP 403"
+ },
+ "guardian": {
+  "etag": "W/\"hash-8899555579153117373\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 26
+ },
+ "nyt": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 23
+ },
+ "elpais": {
+  "etag": "W/\"555c-9EdkTBm2Qzb6SBlO2WbFdfG8zWw\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 12
+ },
+ "spiegel": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z"
+ },
+ "ft": {
+  "etag": "W/\"300c-ksMWbQi5HwWBWHUkFJ0y5OlP29k\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 25
+ },
+ "economist": {
+  "etag": "W/\"bf96896cbcbdfd48bda268417145040b\"",
+  "modifie": "Sat, 28 Nov 2026 14:26:58 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 11
+ },
+ "wsj": {
+  "etag": "W/\"cd6c-Q1zyGHw3zxW12uVd8irlCJoKAAw\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 19
+ },
+ "telegraph": {
+  "etag": "\"82892bd8f52cad37f051f175e9dac336\"",
+  "modifie": "Sat, 28 Nov 2026 12:01:47 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 7
+ },
+ "foxnews": {
+  "etag": "128bf5c99c1172f558eaae13da1655c3",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 4
+ },
+ "aljazeera": {
+  "etag": "W/\"d1cea8392e56a2818c4c8000a56e7a90\"",
+  "modifie": "Sat, 28 Nov 2026 15:01:41 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 25
+ },
+ "jpost": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 20
+ },
+ "jeuneafrique": {
+  "etag": null,
+  "modifie": "Sat, 28 Nov 2026 15:15:01 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 15
+ },
+ "lemondeafrique": {
+  "etag": null,
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 8
+ },
+ "scmp": {
+  "etag": null,
+  "modifie": "Sat, 28 Nov 2026 15:02:56 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 50
+ },
+ "thehindu": {
+  "etag": null,
+  "modifie": "Sat, 28 Nov 2026 11:41:54 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 20
+ },
+ "elpaisamerica": {
+  "etag": "W/\"19237-yvxh8xeiY2dJhaX3gf70k2hH/Ss\"",
+  "modifie": null,
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 79
+ },
+ "folha": {
+  "etag": "W/\"fb2411-1dcc8-6615778fa9100\"",
+  "modifie": "Sat, 28 Nov 2026 15:03:00 GMT",
+  "derniere_tentative": "2026-11-28T15:17:47Z",
+  "echecs": 0,
+  "erreur": null,
+  "dernier_succes": "2026-11-28T15:17:47Z",
+  "derniers_articles": 20
+ }
+}

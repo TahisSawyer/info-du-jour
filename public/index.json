@@ -1,0 +1,79 @@
+[
+ {
+  "date": "2026-11-27",
+  "id": "2026-11-27T1836",
+  "genere_le": "2026-11-27T17:36:34Z",
+  "statut_ia": "complet",
+  "couverture_ia": {
+   "ia": 60,
+   "total": 60
+  },
+  "audio": null
+ },
+ {
+  "date": "2026-11-26",
+  "id": "2026-11-26T1806",
+  "genere_le": "2026-11-26T17:06:24Z",
+  "statut_ia": "complet",
+  "couverture_ia": {
+   "ia": 60,
+   "total": 60
+  },
+  "audio": null
+ },
+ {
+  "date": "2026-11-25",
+  "id": "2026-11-25T1823",
+  "genere_le": "2026-11-25T17:23:34Z",
+  "statut_ia": "complet",
+  "couverture_ia": {
+   "ia": 60,
+   "total": 60
+  },
+  "audio": null
+ },
+ {
+  "date": "2026-11-24",
+  "id": "2026-11-24T1822",
+  "genere_le": "2026-11-24T17:22:43Z",
+  "statut_ia": "complet",
+  "couverture_ia": {
+   "ia": 62,
+   "total": 62
+  },
+  "audio": null
+ },
+ {
+  "date": "2026-11-23",
+  "id": "2026-11-23T1816",
+  "genere_le": "2026-11-23T17:16:54Z",
+  "statut_ia": "partiel",
+  "couverture_ia": {
+   "ia": 15,
+   "total": 61
+  },
+  "audio": null
+ },
+ {
+  "date": "2026-11-22",
+  "id": "2026-11-22T1824",
+  "genere_le": "2026-11-22T17:24:32Z",
+  "statut_ia": "complet",
+  "couverture_ia": {
+   "ia": 62,
+   "total": 62
+  },
+  "audio": null
+ },
+ {
+  "date": "2026-11-21",
+  "id": "2026-11-21T1752",
+  "genere_le": "2026-11-21T16:52:29Z",
+  "statut_ia": "complet",
+  "couverture_ia": {
+   "ia": 60,
+   "total": 60
+  },
+  "audio": null
+ }
+]

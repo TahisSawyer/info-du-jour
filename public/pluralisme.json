@@ -1,0 +1,156 @@
+[
+ {
+  "date": "2026-11-21",
+  "liens": {
+   "non-partisan": 32,
+   "gauche": 19,
+   "centre-droit": 24,
+   "centre": 68,
+   "droite": 32,
+   "centre-gauche": 57,
+   "autre": 11
+  },
+  "bords": {
+   "centre": 111,
+   "gauche": 76,
+   "droite": 56
+  },
+  "total_liens": 243,
+  "diversite_moyenne": 0.865,
+  "part_couverture_partielle": 0.083,
+  "part_points_de_vue": 0.083,
+  "alertes": []
+ },
+ {
+  "date": "2026-11-22",
+  "liens": {
+   "non-partisan": 34,
+   "gauche": 25,
+   "centre-droit": 23,
+   "centre": 62,
+   "droite": 38,
+   "centre-gauche": 57,
+   "autre": 17
+  },
+  "bords": {
+   "centre": 113,
+   "gauche": 82,
+   "droite": 61
+  },
+  "total_liens": 256,
+  "diversite_moyenne": 0.889,
+  "part_couverture_partielle": 0.097,
+  "part_points_de_vue": 0.065,
+  "alertes": []
+ },
+ {
+  "date": "2026-11-23",
+  "liens": {
+   "centre": 68,
+   "centre-gauche": 40,
+   "droite": 25,
+   "gauche": 22,
+   "centre-droit": 26,
+   "non-partisan": 35,
+   "autre": 13
+  },
+  "bords": {
+   "centre": 116,
+   "gauche": 62,
+   "droite": 51
+  },
+  "total_liens": 229,
+  "diversite_moyenne": 0.889,
+  "part_couverture_partielle": 0.18,
+  "part_points_de_vue": 0.197,
+  "alertes": []
+ },
+ {
+  "date": "2026-11-24",
+  "liens": {
+   "centre": 82,
+   "gauche": 35,
+   "droite": 47,
+   "non-partisan": 25,
+   "centre-gauche": 50,
+   "centre-droit": 26,
+   "autre": 12
+  },
+  "bords": {
+   "centre": 119,
+   "gauche": 85,
+   "droite": 73
+  },
+  "total_liens": 277,
+  "diversite_moyenne": 0.864,
+  "part_couverture_partielle": 0.016,
+  "part_points_de_vue": 0.339,
+  "alertes": []
+ },
+ {
+  "date": "2026-11-25",
+  "liens": {
+   "centre": 84,
+   "centre-gauche": 63,
+   "droite": 44,
+   "non-partisan": 37,
+   "gauche": 25,
+   "centre-droit": 40,
+   "autre": 16
+  },
+  "bords": {
+   "centre": 137,
+   "gauche": 88,
+   "droite": 84
+  },
+  "total_liens": 309,
+  "diversite_moyenne": 0.823,
+  "part_couverture_partielle": 0.017,
+  "part_points_de_vue": 0.25,
+  "alertes": []
+ },
+ {
+  "date": "2026-11-26",
+  "liens": {
+   "centre": 80,
+   "centre-gauche": 62,
+   "droite": 53,
+   "gauche": 30,
+   "centre-droit": 23,
+   "non-partisan": 40,
+   "autre": 16
+  },
+  "bords": {
+   "centre": 136,
+   "gauche": 92,
+   "droite": 76
+  },
+  "total_liens": 304,
+  "diversite_moyenne": 0.854,
+  "part_couverture_partielle": 0.017,
+  "part_points_de_vue": 0.033,
+  "alertes": []
+ },
+ {
+  "date": "2026-11-27",
+  "liens": {
+   "centre": 76,
+   "gauche": 23,
+   "droite": 45,
+   "non-partisan": 45,
+   "centre-droit": 31,
+   "centre-gauche": 43,
+   "autre": 9
+  },
+  "bords": {
+   "centre": 130,
+   "gauche": 66,
+   "droite": 76
+  },
+  "total_liens": 272,
+  "diversite_moyenne": 0.856,
+  "part_couverture_partielle": 0.1,
+  "part_points_de_vue": 0.067,
+  "alertes": []
+ }
+]

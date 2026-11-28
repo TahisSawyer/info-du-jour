@@ -1,0 +1,1644 @@
+[
+ {
+  "le": "2026-11-28T15:22:29Z",
+  "etape": "redaction-preparation",
+  "appels": 12,
+  "rejets": 4,
+  "fournisseurs": {
+   "Gemini": 12
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 4
+  },
+  "reutilises": 48,
+  "rediges": 65,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-28T15:17:48Z",
+  "etape": "collecte",
+  "articles_ajoutes": 77,
+  "articles_connus": 6455,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T14:28:54Z",
+  "etape": "redaction-preparation",
+  "appels": 12,
+  "rejets": 8,
+  "fournisseurs": {
+   "Gemini": 12
+  },
+  "reutilises": 46,
+  "rediges": 65,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-28T14:25:38Z",
+  "etape": "collecte",
+  "articles_ajoutes": 70,
+  "articles_connus": 6486,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T13:42:07Z",
+  "etape": "redaction-preparation",
+  "appels": 5,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 5
+  },
+  "reutilises": 39,
+  "rediges": 61,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-28T13:37:14Z",
+  "etape": "collecte",
+  "articles_ajoutes": 105,
+  "articles_connus": 6568,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T12:21:50Z",
+  "etape": "redaction-preparation",
+  "appels": 7,
+  "rejets": 4,
+  "fournisseurs": {
+   "Gemini": 7
+  },
+  "reutilises": 48,
+  "rediges": 61,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-28T12:20:07Z",
+  "etape": "collecte",
+  "articles_ajoutes": 85,
+  "articles_connus": 6612,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T11:25:54Z",
+  "etape": "redaction-preparation",
+  "appels": 18,
+  "rejets": 13,
+  "fournisseurs": {
+   "Gemini": 18
+  },
+  "reutilises": 40,
+  "rediges": 62,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-28T11:20:53Z",
+  "etape": "collecte",
+  "articles_ajoutes": 95,
+  "articles_connus": 6676,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T10:27:48Z",
+  "etape": "redaction-preparation",
+  "appels": 15,
+  "rejets": 1,
+  "fournisseurs": {
+   "Gemini": 15
+  },
+  "erreurs": {
+   "Gemini réponse illisible": 1
+  },
+  "reutilises": 0,
+  "rediges": 61,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-28T10:24:22Z",
+  "etape": "collecte",
+  "articles_ajoutes": 159,
+  "articles_connus": 6727,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T09:21:32Z",
+  "etape": "collecte",
+  "articles_ajoutes": 87,
+  "articles_connus": 6688,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T08:16:38Z",
+  "etape": "collecte",
+  "articles_ajoutes": 105,
+  "articles_connus": 6729,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T07:05:37Z",
+  "etape": "collecte",
+  "articles_ajoutes": 121,
+  "articles_connus": 6774,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-28T05:55:11Z",
+  "etape": "collecte",
+  "articles_ajoutes": 282,
+  "articles_connus": 7103,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T20:27:11Z",
+  "etape": "collecte",
+  "articles_ajoutes": 81,
+  "articles_connus": 6905,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T19:30:52Z",
+  "etape": "collecte",
+  "articles_ajoutes": 103,
+  "articles_connus": 6965,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T18:18:06Z",
+  "etape": "collecte",
+  "articles_ajoutes": 93,
+  "articles_connus": 6987,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T17:36:34Z",
+  "etape": "publication",
+  "edition": "2026-11-27T1836",
+  "statut_ia": "complet",
+  "ia": 60,
+  "total": 60
+ },
+ {
+  "le": "2026-11-27T17:36:33Z",
+  "etape": "redaction-edition",
+  "appels": 9,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 9
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 1,
+   "Gemini HTTP 429": 1
+  },
+  "reutilises": 39,
+  "rediges": 60,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-27T17:31:11Z",
+  "etape": "collecte",
+  "articles_ajoutes": 112,
+  "articles_connus": 7102,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T16:41:51Z",
+  "etape": "redaction-preparation",
+  "appels": 14,
+  "rejets": 7,
+  "fournisseurs": {
+   "Gemini": 14
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 1
+  },
+  "reutilises": 37,
+  "rediges": 60,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-27T16:36:22Z",
+  "etape": "collecte",
+  "articles_ajoutes": 154,
+  "articles_connus": 7126,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T15:32:12Z",
+  "etape": "redaction-preparation",
+  "appels": 10,
+  "rejets": 4,
+  "fournisseurs": {
+   "Gemini": 10
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 1
+  },
+  "reutilises": 39,
+  "rediges": 61,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-27T15:29:33Z",
+  "etape": "collecte",
+  "articles_ajoutes": 121,
+  "articles_connus": 7065,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T14:35:08Z",
+  "etape": "redaction-preparation",
+  "appels": 11,
+  "rejets": 5,
+  "fournisseurs": {
+   "Gemini": 11
+  },
+  "reutilises": 33,
+  "rediges": 60,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-27T14:32:30Z",
+  "etape": "collecte",
+  "articles_ajoutes": 141,
+  "articles_connus": 7110,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T13:10:16Z",
+  "etape": "redaction-preparation",
+  "appels": 5,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 5
+  },
+  "reutilises": 39,
+  "rediges": 60,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-27T13:08:59Z",
+  "etape": "collecte",
+  "articles_ajoutes": 128,
+  "articles_connus": 7108,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T11:58:15Z",
+  "etape": "redaction-preparation",
+  "appels": 11,
+  "rejets": 5,
+  "fournisseurs": {
+   "Gemini": 11
+  },
+  "reutilises": 34,
+  "rediges": 61,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-27T11:55:39Z",
+  "etape": "collecte",
+  "articles_ajoutes": 163,
+  "articles_connus": 7081,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T10:56:51Z",
+  "etape": "redaction-preparation",
+  "appels": 10,
+  "rejets": 5,
+  "fournisseurs": {
+   "Gemini": 10
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 1
+  },
+  "reutilises": 44,
+  "rediges": 62,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-27T10:54:41Z",
+  "etape": "collecte",
+  "articles_ajoutes": 133,
+  "articles_connus": 7011,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T10:10:08Z",
+  "etape": "redaction-preparation",
+  "appels": 31,
+  "rejets": 13,
+  "fournisseurs": {
+   "Gemini": 31
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 6
+  },
+  "reutilises": 3,
+  "rediges": 62,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-27T10:02:58Z",
+  "etape": "collecte",
+  "articles_ajoutes": 191,
+  "articles_connus": 7037,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T08:46:16Z",
+  "etape": "collecte",
+  "articles_ajoutes": 159,
+  "articles_connus": 6955,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T07:12:09Z",
+  "etape": "collecte",
+  "articles_ajoutes": 141,
+  "articles_connus": 6952,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-27T06:00:04Z",
+  "etape": "collecte",
+  "articles_ajoutes": 359,
+  "articles_connus": 7198,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T20:52:18Z",
+  "etape": "collecte",
+  "articles_ajoutes": 74,
+  "articles_connus": 6869,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T20:00:32Z",
+  "etape": "collecte",
+  "articles_ajoutes": 96,
+  "articles_connus": 6832,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T18:55:11Z",
+  "etape": "collecte",
+  "articles_ajoutes": 120,
+  "articles_connus": 6796,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T17:54:49Z",
+  "etape": "collecte",
+  "articles_ajoutes": 131,
+  "articles_connus": 6723,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T17:06:24Z",
+  "etape": "publication",
+  "edition": "2026-11-26T1806",
+  "statut_ia": "complet",
+  "ia": 60,
+  "total": 60
+ },
+ {
+  "le": "2026-11-26T17:06:23Z",
+  "etape": "redaction-edition",
+  "appels": 11,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 11
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 2,
+   "Gemini HTTP 429": 1
+  },
+  "reutilises": 34,
+  "rediges": 60,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-26T17:04:01Z",
+  "etape": "collecte",
+  "articles_ajoutes": 166,
+  "articles_connus": 6791,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T16:03:06Z",
+  "etape": "redaction-preparation",
+  "appels": 11,
+  "rejets": 2,
+  "fournisseurs": {
+   "Gemini": 11
+  },
+  "erreurs": {
+   "Gemini HTTP 429": 1,
+   "Gemini HTTP 503": 2
+  },
+  "reutilises": 40,
+  "rediges": 63,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-26T15:58:36Z",
+  "etape": "collecte",
+  "articles_ajoutes": 179,
+  "articles_connus": 6735,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T14:43:51Z",
+  "etape": "redaction-preparation",
+  "appels": 15,
+  "rejets": 8,
+  "fournisseurs": {
+   "Gemini": 15
+  },
+  "erreurs": {
+   "Gemini réponse illisible": 1,
+   "Gemini HTTP 503": 1
+  },
+  "reutilises": 40,
+  "rediges": 62,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-26T14:40:11Z",
+  "etape": "collecte",
+  "articles_ajoutes": 239,
+  "articles_connus": 6673,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T13:16:12Z",
+  "etape": "redaction-preparation",
+  "appels": 16,
+  "rejets": 3,
+  "fournisseurs": {
+   "Gemini": 16
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 7
+  },
+  "reutilises": 39,
+  "rediges": 62,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-26T13:12:57Z",
+  "etape": "collecte",
+  "articles_ajoutes": 140,
+  "articles_connus": 6593,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T12:00:54Z",
+  "etape": "redaction-preparation",
+  "appels": 13,
+  "rejets": 2,
+  "fournisseurs": {
+   "Gemini": 13
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 5
+  },
+  "reutilises": 36,
+  "rediges": 62,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-26T11:57:15Z",
+  "etape": "collecte",
+  "articles_ajoutes": 142,
+  "articles_connus": 6610,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T11:07:00Z",
+  "etape": "redaction-preparation",
+  "appels": 34,
+  "rejets": 13,
+  "fournisseurs": {
+   "Gemini": 34
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 10,
+   "Gemini HTTP 429": 1
+  },
+  "reutilises": 13,
+  "rediges": 61,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-26T11:00:03Z",
+  "etape": "collecte",
+  "articles_ajoutes": 126,
+  "articles_connus": 6576,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T10:27:20Z",
+  "etape": "redaction-preparation",
+  "appels": 52,
+  "rejets": 4,
+  "fournisseurs": {
+   "Gemini": 32,
+   "OpenRouter": 20
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 25,
+   "OpenRouter réponse illisible": 6,
+   "OpenRouter HTTP 429": 12,
+   "Gemini HTTP 429": 2
+  },
+  "reutilises": 2,
+  "rediges": 17,
+  "sans_ia": 43
+ },
+ {
+  "le": "2026-11-26T10:06:32Z",
+  "etape": "collecte",
+  "articles_ajoutes": 230,
+  "articles_connus": 6565,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T08:45:27Z",
+  "etape": "collecte",
+  "articles_ajoutes": 154,
+  "articles_connus": 6406,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T07:11:12Z",
+  "etape": "collecte",
+  "articles_ajoutes": 166,
+  "articles_connus": 6317,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-26T05:58:41Z",
+  "etape": "collecte",
+  "articles_ajoutes": 410,
+  "articles_connus": 6500,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T20:53:22Z",
+  "etape": "collecte",
+  "articles_ajoutes": 90,
+  "articles_connus": 6124,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T19:55:26Z",
+  "etape": "rattrapage",
+  "rattrapes": 5,
+  "restants": 0,
+  "appels": 7,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 7
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 3,
+   "Gemini HTTP 429": 1
+  }
+ },
+ {
+  "le": "2026-11-25T19:54:11Z",
+  "etape": "collecte",
+  "articles_ajoutes": 117,
+  "articles_connus": 6105,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T19:02:46Z",
+  "etape": "rattrapage",
+  "rattrapes": 30,
+  "restants": 5,
+  "appels": 37,
+  "rejets": 9,
+  "fournisseurs": {
+   "Gemini": 35,
+   "OpenRouter": 2
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 20,
+   "Gemini HTTP 429": 2
+  }
+ },
+ {
+  "le": "2026-11-25T18:50:32Z",
+  "etape": "collecte",
+  "articles_ajoutes": 123,
+  "articles_connus": 6087,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T18:02:27Z",
+  "etape": "rattrapage",
+  "rattrapes": 0,
+  "restants": 35,
+  "appels": 22,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 7,
+   "OpenRouter": 15
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 5,
+   "Gemini HTTP 429": 2,
+   "OpenRouter réponse illisible": 5,
+   "OpenRouter HTTP 429": 10
+  }
+ },
+ {
+  "le": "2026-11-25T17:48:21Z",
+  "etape": "collecte",
+  "articles_ajoutes": 120,
+  "articles_connus": 6030,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T17:23:34Z",
+  "etape": "publication",
+  "edition": "2026-11-25T1823",
+  "statut_ia": "partiel",
+  "ia": 25,
+  "total": 60
+ },
+ {
+  "le": "2026-11-25T17:23:32Z",
+  "etape": "redaction-edition",
+  "appels": 42,
+  "rejets": 4,
+  "fournisseurs": {
+   "Gemini": 27,
+   "OpenRouter": 15
+  },
+  "erreurs": {
+   "Gemini HTTP 429": 2,
+   "Gemini HTTP 503": 21,
+   "OpenRouter réponse illisible": 2,
+   "OpenRouter HTTP 429": 9
+  },
+  "reutilises": 7,
+  "rediges": 25,
+  "sans_ia": 35
+ },
+ {
+  "le": "2026-11-25T17:02:28Z",
+  "etape": "collecte",
+  "articles_ajoutes": 155,
+  "articles_connus": 6014,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T16:22:00Z",
+  "etape": "redaction-preparation",
+  "appels": 30,
+  "rejets": 2,
+  "fournisseurs": {
+   "Gemini": 12,
+   "OpenRouter": 18
+  },
+  "erreurs": {
+   "Gemini HTTP 429": 2,
+   "Gemini HTTP 503": 10,
+   "OpenRouter réponse illisible": 5,
+   "OpenRouter HTTP 429": 10
+  },
+  "reutilises": 5,
+  "rediges": 10,
+  "sans_ia": 6
+ },
+ {
+  "le": "2026-11-25T16:00:23Z",
+  "etape": "collecte",
+  "articles_ajoutes": 143,
+  "articles_connus": 5947,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T15:19:24Z",
+  "etape": "redaction-preparation",
+  "appels": 31,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 13,
+   "OpenRouter": 18
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 12,
+   "OpenRouter réponse illisible": 7,
+   "OpenRouter HTTP 429": 11
+  },
+  "reutilises": 10,
+  "rediges": 11,
+  "sans_ia": 5
+ },
+ {
+  "le": "2026-11-25T14:59:43Z",
+  "etape": "collecte",
+  "articles_ajoutes": 155,
+  "articles_connus": 5893,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T13:53:30Z",
+  "etape": "redaction-preparation",
+  "appels": 2,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 2
+  },
+  "reutilises": 10,
+  "rediges": 16,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-25T13:52:46Z",
+  "etape": "collecte",
+  "articles_ajoutes": 181,
+  "articles_connus": 5836,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T12:35:25Z",
+  "etape": "redaction-preparation",
+  "appels": 3,
+  "rejets": 1,
+  "fournisseurs": {
+   "Gemini": 3
+  },
+  "reutilises": 10,
+  "rediges": 16,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-25T12:34:29Z",
+  "etape": "collecte",
+  "articles_ajoutes": 141,
+  "articles_connus": 5751,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T11:30:07Z",
+  "etape": "redaction-preparation",
+  "appels": 2,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 2
+  },
+  "reutilises": 9,
+  "rediges": 16,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-25T11:29:23Z",
+  "etape": "collecte",
+  "articles_ajoutes": 266,
+  "articles_connus": 5718,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T10:10:15Z",
+  "etape": "redaction-preparation",
+  "appels": 5,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 5
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 1
+  },
+  "reutilises": 0,
+  "rediges": 16,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-25T10:08:37Z",
+  "etape": "collecte",
+  "articles_ajoutes": 156,
+  "articles_connus": 5596,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T08:48:43Z",
+  "etape": "collecte",
+  "articles_ajoutes": 158,
+  "articles_connus": 5542,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T07:13:17Z",
+  "etape": "collecte",
+  "articles_ajoutes": 144,
+  "articles_connus": 5563,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-25T05:58:27Z",
+  "etape": "collecte",
+  "articles_ajoutes": 412,
+  "articles_connus": 5671,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-24T20:50:59Z",
+  "etape": "collecte",
+  "articles_ajoutes": 83,
+  "articles_connus": 5285,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-24T20:04:03Z",
+  "etape": "rattrapage",
+  "rattrapes": 29,
+  "restants": 0,
+  "appels": 23,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 22,
+   "OpenRouter": 1
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 13,
+   "Gemini HTTP 429": 2
+  }
+ },
+ {
+  "le": "2026-11-24T19:59:53Z",
+  "etape": "collecte",
+  "articles_ajoutes": 113,
+  "articles_connus": 5227,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir",
+   "liberation"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-24T19:08:09Z",
+  "etape": "rattrapage",
+  "rattrapes": 0,
+  "restants": 29,
+  "appels": 18,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 5,
+   "OpenRouter": 13
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 3,
+   "Gemini HTTP 429": 2,
+   "OpenRouter réponse illisible": 4,
+   "OpenRouter HTTP 429": 9
+  }
+ },
+ {
+  "le": "2026-11-24T18:55:51Z",
+  "etape": "collecte",
+  "articles_ajoutes": 129,
+  "articles_connus": 5156,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-24T18:18:21Z",
+  "etape": "rattrapage",
+  "rattrapes": 5,
+  "restants": 29,
+  "appels": 28,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 13,
+   "OpenRouter": 15
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 11,
+   "Gemini HTTP 429": 2,
+   "OpenRouter réponse illisible": 5,
+   "OpenRouter HTTP 429": 9
+  }
+ },
+ {
+  "le": "2026-11-24T18:04:24Z",
+  "etape": "rattrapage",
+  "rattrapes": 15,
+  "restants": 34,
+  "appels": 27,
+  "rejets": 1,
+  "fournisseurs": {
+   "Gemini": 17,
+   "OpenRouter": 10
+  },
+  "erreurs": {
+   "Gemini HTTP 429": 2,
+   "Gemini HTTP 503": 13,
+   "OpenRouter réponse illisible": 1,
+   "OpenRouter HTTP 429": 6
+  }
+ },
+ {
+  "le": "2026-11-24T17:52:12Z",
+  "etape": "collecte",
+  "articles_ajoutes": 165,
+  "articles_connus": 5063,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-24T17:51:16Z",
+  "etape": "rattrapage",
+  "rattrapes": 5,
+  "restants": 49,
+  "appels": 21,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 10,
+   "OpenRouter": 11
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 8,
+   "Gemini HTTP 429": 2,
+   "OpenRouter réponse illisible": 2,
+   "OpenRouter HTTP 429": 6
+  }
+ },
+ {
+  "le": "2026-11-24T17:22:43Z",
+  "etape": "publication",
+  "edition": "2026-11-24T1822",
+  "statut_ia": "partiel",
+  "ia": 8,
+  "total": 62
+ },
+ {
+  "le": "2026-11-24T17:22:41Z",
+  "etape": "redaction-edition",
+  "appels": 75,
+  "rejets": 4,
+  "fournisseurs": {
+   "Gemini": 69,
+   "OpenRouter": 6
+  },
+  "erreurs": {
+   "Gemini HTTP 503": 64
+  },
+  "reutilises": 0,
+  "rediges": 8,
+  "sans_ia": 54
+ },
+ {
+  "le": "2026-11-24T17:00:45Z",
+  "etape": "collecte",
+  "articles_ajoutes": 442,
+  "articles_connus": 5269,
+  "flux_en_echec": [
+   "france24",
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-24T13:10:45Z",
+  "etape": "collecte",
+  "articles_ajoutes": 369,
+  "articles_connus": 5030,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-24T10:05:07Z",
+  "etape": "collecte",
+  "articles_ajoutes": 401,
+  "articles_connus": 4816,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-24T06:27:36Z",
+  "etape": "collecte",
+  "articles_ajoutes": 631,
+  "articles_connus": 4755,
+  "flux_en_echec": [
+   "europe1",
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-23T17:16:54Z",
+  "etape": "publication",
+  "edition": "2026-11-23T1816",
+  "statut_ia": "partiel",
+  "ia": 15,
+  "total": 61
+ },
+ {
+  "le": "2026-11-23T17:16:52Z",
+  "etape": "redaction-edition",
+  "appels": 85,
+  "rejets": 8,
+  "fournisseurs": {
+   "Gemini": 79,
+   "OpenRouter": 6
+  },
+  "reutilises": 1,
+  "rediges": 15,
+  "sans_ia": 46
+ },
+ {
+  "le": "2026-11-23T16:58:24Z",
+  "etape": "collecte",
+  "articles_ajoutes": 404,
+  "articles_connus": 4243,
+  "flux_en_echec": [
+   "europe1",
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-23T13:11:05Z",
+  "etape": "collecte",
+  "articles_ajoutes": 239,
+  "articles_connus": 3876,
+  "flux_en_echec": [
+   "europe1",
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-23T11:04:18Z",
+  "etape": "collecte",
+  "articles_ajoutes": 486,
+  "articles_connus": 3676,
+  "flux_en_echec": [
+   "europe1",
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-23T05:14:31Z",
+  "etape": "collecte",
+  "articles_ajoutes": 288,
+  "articles_connus": 3190,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T20:19:14Z",
+  "etape": "collecte",
+  "articles_ajoutes": 52,
+  "articles_connus": 2902,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T19:26:43Z",
+  "etape": "collecte",
+  "articles_ajoutes": 105,
+  "articles_connus": 2850,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T18:12:08Z",
+  "etape": "collecte",
+  "articles_ajoutes": 82,
+  "articles_connus": 2745,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T17:24:32Z",
+  "etape": "publication",
+  "edition": "2026-11-22T1824",
+  "statut_ia": "complet",
+  "ia": 62,
+  "total": 62
+ },
+ {
+  "le": "2026-11-22T17:24:31Z",
+  "etape": "redaction-edition",
+  "appels": 35,
+  "rejets": 21,
+  "fournisseurs": {
+   "Gemini": 35
+  },
+  "reutilises": 11,
+  "rediges": 62,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-22T17:16:42Z",
+  "etape": "collecte",
+  "articles_ajoutes": 103,
+  "articles_connus": 2663,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T16:17:48Z",
+  "etape": "collecte",
+  "articles_ajoutes": 96,
+  "articles_connus": 2560,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T15:18:33Z",
+  "etape": "redaction-preparation",
+  "appels": 4,
+  "rejets": 1,
+  "fournisseurs": {
+   "Gemini": 4
+  },
+  "reutilises": 3,
+  "rediges": 16,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-22T15:17:19Z",
+  "etape": "collecte",
+  "articles_ajoutes": 72,
+  "articles_connus": 2464,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T14:31:38Z",
+  "etape": "redaction-preparation",
+  "appels": 22,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 16,
+   "OpenRouter": 6
+  },
+  "reutilises": 0,
+  "rediges": 6,
+  "sans_ia": 10
+ },
+ {
+  "le": "2026-11-22T14:22:14Z",
+  "etape": "collecte",
+  "articles_ajoutes": 164,
+  "articles_connus": 2392,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T12:14:34Z",
+  "etape": "collecte",
+  "articles_ajoutes": 91,
+  "articles_connus": 2228,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T11:15:19Z",
+  "etape": "collecte",
+  "articles_ajoutes": 71,
+  "articles_connus": 2137,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T10:19:25Z",
+  "etape": "collecte",
+  "articles_ajoutes": 147,
+  "articles_connus": 2066,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T09:17:40Z",
+  "etape": "collecte",
+  "articles_ajoutes": 95,
+  "articles_connus": 1919,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T08:11:06Z",
+  "etape": "collecte",
+  "articles_ajoutes": 100,
+  "articles_connus": 1824,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-22T07:01:05Z",
+  "etape": "collecte",
+  "articles_ajoutes": 498,
+  "articles_connus": 1724,
+  "flux_en_echec": [
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-21T16:52:29Z",
+  "etape": "publication",
+  "edition": "2026-11-21T1752",
+  "statut_ia": "complet",
+  "ia": 60,
+  "total": 60
+ },
+ {
+  "le": "2026-11-21T16:52:27Z",
+  "etape": "redaction-edition",
+  "appels": 40,
+  "rejets": 9,
+  "fournisseurs": {
+   "Gemini": 33,
+   "OpenRouter": 7
+  },
+  "reutilises": 0,
+  "rediges": 60,
+  "sans_ia": 0
+ },
+ {
+  "le": "2026-11-21T16:42:22Z",
+  "etape": "collecte",
+  "articles_ajoutes": 129,
+  "articles_connus": 1226,
+  "flux_en_echec": [
+   "lepoint",
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-21T16:12:30Z",
+  "etape": "rattrapage",
+  "rattrapes": 46,
+  "restants": 1,
+  "appels": 39,
+  "rejets": 16,
+  "fournisseurs": {
+   "Gemini": 39
+  }
+ },
+ {
+  "le": "2026-11-21T15:31:53Z",
+  "etape": "rattrapage",
+  "rattrapes": 12,
+  "restants": 47,
+  "appels": 19,
+  "rejets": 9,
+  "fournisseurs": {
+   "Gemini": 19
+  }
+ },
+ {
+  "le": "2026-11-21T15:16:57Z",
+  "etape": "rattrapage",
+  "rattrapes": 4,
+  "restants": 59,
+  "appels": 11,
+  "rejets": 4,
+  "fournisseurs": {
+   "Gemini": 11
+  }
+ },
+ {
+  "le": "2026-11-21T15:02:25Z",
+  "etape": "publication",
+  "edition": "2026-11-21T1602",
+  "statut_ia": "aucun",
+  "ia": 0,
+  "total": 63
+ },
+ {
+  "le": "2026-11-21T15:02:24Z",
+  "etape": "redaction-edition",
+  "appels": 2,
+  "rejets": 0,
+  "fournisseurs": {
+   "Gemini": 2
+  },
+  "reutilises": 0,
+  "rediges": 0,
+  "sans_ia": 63
+ },
+ {
+  "le": "2026-11-21T15:01:59Z",
+  "etape": "collecte",
+  "articles_ajoutes": 30,
+  "articles_connus": 1097,
+  "flux_en_echec": [
+   "lepoint",
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ },
+ {
+  "le": "2026-11-21T14:45:53Z",
+  "etape": "publication",
+  "edition": "2026-11-21T1545",
+  "statut_ia": "aucun",
+  "ia": 0,
+  "total": 62
+ },
+ {
+  "le": "2026-11-21T14:45:52Z",
+  "etape": "redaction-edition",
+  "appels": 0,
+  "rejets": 0,
+  "fournisseurs": {},
+  "reutilises": 0,
+  "rediges": 0,
+  "sans_ia": 62
+ },
+ {
+  "le": "2026-11-21T14:45:17Z",
+  "etape": "collecte",
+  "articles_ajoutes": 1067,
+  "articles_connus": 1067,
+  "flux_en_echec": [
+   "lepoint",
+   "lesechos",
+   "lesoir"
+  ],
+  "via_api": 0
+ }
+]

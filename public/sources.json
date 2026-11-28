@@ -1,0 +1,1214 @@
+{
+ "genere_le": "2026-11-27T17:36:34Z",
+ "orientations": [
+  {
+   "id": "gauche",
+   "libelle": "Gauche"
+  },
+  {
+   "id": "centre-gauche",
+   "libelle": "Centre-gauche"
+  },
+  {
+   "id": "centre",
+   "libelle": "Centre"
+  },
+  {
+   "id": "centre-droit",
+   "libelle": "Centre-droit"
+  },
+  {
+   "id": "droite",
+   "libelle": "Droite"
+  },
+  {
+   "id": "non-partisan",
+   "libelle": "Non partisan"
+  },
+  {
+   "id": "autre",
+   "libelle": "Autre regard"
+  }
+ ],
+ "rubriques": [
+  {
+   "id": "politique",
+   "nom": "Politique"
+  },
+  {
+   "id": "economie",
+   "nom": "Économie & Finance"
+  },
+  {
+   "id": "technologie",
+   "nom": "Technologie"
+  },
+  {
+   "id": "sciences-environnement",
+   "nom": "Sciences & Environnement"
+  },
+  {
+   "id": "sante",
+   "nom": "Santé"
+  },
+  {
+   "id": "culture",
+   "nom": "Culture"
+  },
+  {
+   "id": "sport",
+   "nom": "Sport"
+  },
+  {
+   "id": "societe",
+   "nom": "Société"
+  }
+ ],
+ "catalogue": [
+  {
+   "id": "franceinfo",
+   "nom": "Franceinfo",
+   "pays": "FR",
+   "region": "france",
+   "nature": "service-public",
+   "orientation": "non-partisan",
+   "orientation_libelle": "Non partisan",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.francetvinfo.fr/titres.rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "france24",
+   "nom": "France 24",
+   "pays": "FR",
+   "region": "france",
+   "nature": "service-public",
+   "orientation": "non-partisan",
+   "orientation_libelle": "Non partisan",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.france24.com/fr/rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "rfi",
+   "nom": "RFI",
+   "pays": "FR",
+   "region": "france",
+   "nature": "service-public",
+   "orientation": "non-partisan",
+   "orientation_libelle": "Non partisan",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.rfi.fr/fr/rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "20minutes",
+   "nom": "20 Minutes",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.20minutes.fr/feeds/rss-une.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "ouestfrance",
+   "nom": "Ouest-France",
+   "pays": "FR",
+   "region": "france",
+   "nature": "regional",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.ouest-france.fr/rss/une",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lacroix",
+   "nom": "La Croix",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.la-croix.com/RSS/UNIVERS",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lexpress",
+   "nom": "L'Express",
+   "pays": "FR",
+   "region": "france",
+   "nature": "magazine",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.lexpress.fr/arc/outboundfeeds/rss/alaune.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "leparisien",
+   "nom": "Le Parisien",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": false,
+   "actif": true,
+   "flux": "https://feeds.leparisien.fr/leparisien/rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "bfmtv",
+   "nom": "BFMTV",
+   "pays": "FR",
+   "region": "france",
+   "nature": "radio-tv",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.bfmtv.com/rss/news-24-7/",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "marianne",
+   "nom": "Marianne",
+   "pays": "FR",
+   "region": "france",
+   "nature": "magazine",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": true,
+   "actif": false,
+   "flux": "https://www.marianne.net/rss.xml",
+   "dernier_succes": null,
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lemonde",
+   "nom": "Le Monde",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.lemonde.fr/rss/une.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lobs",
+   "nom": "L'Obs",
+   "pays": "FR",
+   "region": "france",
+   "nature": "magazine",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.nouvelobs.com/a-la-une/rss.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "liberation",
+   "nom": "Libération",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "gauche",
+   "orientation_libelle": "Gauche",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.liberation.fr/arc/outboundfeeds/rss-all/collection/accueil-une/?outputType=xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "humanite",
+   "nom": "L'Humanité",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "gauche",
+   "orientation_libelle": "Gauche",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.humanite.fr/feed",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "mediapart",
+   "nom": "Mediapart",
+   "pays": "FR",
+   "region": "france",
+   "nature": "independant",
+   "orientation": "gauche",
+   "orientation_libelle": "Gauche",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.mediapart.fr/articles/feed",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "reporterre",
+   "nom": "Reporterre",
+   "pays": "FR",
+   "region": "france",
+   "nature": "independant",
+   "orientation": "gauche",
+   "orientation_libelle": "Gauche",
+   "payant": false,
+   "actif": true,
+   "flux": "https://reporterre.net/spip.php?page=backend",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "altereco",
+   "nom": "Alternatives Économiques",
+   "pays": "FR",
+   "region": "france",
+   "nature": "economique",
+   "orientation": "gauche",
+   "orientation_libelle": "Gauche",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.alternatives-economiques.fr/rss.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lepoint",
+   "nom": "Le Point",
+   "pays": "FR",
+   "region": "france",
+   "nature": "magazine",
+   "orientation": "centre-droit",
+   "orientation_libelle": "Centre-droit",
+   "payant": true,
+   "actif": false,
+   "flux": "https://www.lepoint.fr/24h-infos/rss.xml",
+   "dernier_succes": null,
+   "echecs": 1,
+   "erreur": "HTTP 403",
+   "alerte": false
+  },
+  {
+   "id": "lopinion",
+   "nom": "L'Opinion",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "centre-droit",
+   "orientation_libelle": "Centre-droit",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.lopinion.fr/index.rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lesechos",
+   "nom": "Les Échos",
+   "pays": "FR",
+   "region": "france",
+   "nature": "economique",
+   "orientation": "centre-droit",
+   "orientation_libelle": "Centre-droit",
+   "payant": true,
+   "actif": true,
+   "flux": "https://services.lesechos.fr/rss/les-echos-economie.xml",
+   "dernier_succes": null,
+   "echecs": 67,
+   "erreur": "HTTP 403",
+   "alerte": true
+  },
+  {
+   "id": "latribune",
+   "nom": "La Tribune",
+   "pays": "FR",
+   "region": "france",
+   "nature": "economique",
+   "orientation": "centre-droit",
+   "orientation_libelle": "Centre-droit",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.latribune.fr/feed.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lefigaro",
+   "nom": "Le Figaro",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "droite",
+   "orientation_libelle": "Droite",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.lefigaro.fr/rss/figaro_actualites.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lejdd",
+   "nom": "Le JDD",
+   "pays": "FR",
+   "region": "france",
+   "nature": "generaliste",
+   "orientation": "droite",
+   "orientation_libelle": "Droite",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.lejdd.fr/rss.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "valeurs",
+   "nom": "Valeurs actuelles",
+   "pays": "FR",
+   "region": "france",
+   "nature": "magazine",
+   "orientation": "droite",
+   "orientation_libelle": "Droite",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.valeursactuelles.com/feed",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "europe1",
+   "nom": "Europe 1",
+   "pays": "FR",
+   "region": "france",
+   "nature": "radio-tv",
+   "orientation": "droite",
+   "orientation_libelle": "Droite",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.europe1.fr/rss.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "bbc",
+   "nom": "BBC News",
+   "pays": "GB",
+   "region": "europe",
+   "nature": "service-public",
+   "orientation": "non-partisan",
+   "orientation_libelle": "Non partisan",
+   "payant": false,
+   "actif": true,
+   "flux": "https://feeds.bbci.co.uk/news/world/rss.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "dw",
+   "nom": "Deutsche Welle",
+   "pays": "DE",
+   "region": "europe",
+   "nature": "service-public",
+   "orientation": "non-partisan",
+   "orientation_libelle": "Non partisan",
+   "payant": false,
+   "actif": true,
+   "flux": "https://rss.dw.com/rdf/rss-en-all",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "euronews",
+   "nom": "Euronews",
+   "pays": "EU",
+   "region": "europe",
+   "nature": "radio-tv",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": false,
+   "actif": true,
+   "flux": "https://fr.euronews.com/rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "politico",
+   "nom": "Politico Europe",
+   "pays": "EU",
+   "region": "europe",
+   "nature": "generaliste",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.politico.eu/feed/",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "letemps",
+   "nom": "Le Temps",
+   "pays": "CH",
+   "region": "europe",
+   "nature": "generaliste",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.letemps.ch/articles.rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lesoir",
+   "nom": "Le Soir",
+   "pays": "BE",
+   "region": "europe",
+   "nature": "generaliste",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.lesoir.be/rss2/2/cible_principale",
+   "dernier_succes": null,
+   "echecs": 67,
+   "erreur": "HTTP 403",
+   "alerte": true
+  },
+  {
+   "id": "guardian",
+   "nom": "The Guardian",
+   "pays": "GB",
+   "region": "europe",
+   "nature": "generaliste",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.theguardian.com/world/rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "nyt",
+   "nom": "The New York Times",
+   "pays": "US",
+   "region": "amerique-nord",
+   "nature": "generaliste",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": true,
+   "actif": true,
+   "flux": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "elpais",
+   "nom": "El País",
+   "pays": "ES",
+   "region": "europe",
+   "nature": "generaliste",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": false,
+   "actif": true,
+   "flux": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/internacional/portada",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "spiegel",
+   "nom": "Der Spiegel International",
+   "pays": "DE",
+   "region": "europe",
+   "nature": "magazine",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.spiegel.de/international/index.rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "ft",
+   "nom": "Financial Times",
+   "pays": "GB",
+   "region": "europe",
+   "nature": "economique",
+   "orientation": "centre-droit",
+   "orientation_libelle": "Centre-droit",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.ft.com/world?format=rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "economist",
+   "nom": "The Economist",
+   "pays": "GB",
+   "region": "europe",
+   "nature": "magazine",
+   "orientation": "centre-droit",
+   "orientation_libelle": "Centre-droit",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.economist.com/latest/rss.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "wsj",
+   "nom": "The Wall Street Journal",
+   "pays": "US",
+   "region": "amerique-nord",
+   "nature": "economique",
+   "orientation": "centre-droit",
+   "orientation_libelle": "Centre-droit",
+   "payant": true,
+   "actif": true,
+   "flux": "https://feeds.content.dowjones.io/public/rss/RSSWorldNews",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "telegraph",
+   "nom": "The Telegraph",
+   "pays": "GB",
+   "region": "europe",
+   "nature": "generaliste",
+   "orientation": "droite",
+   "orientation_libelle": "Droite",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.telegraph.co.uk/rss.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "foxnews",
+   "nom": "Fox News",
+   "pays": "US",
+   "region": "amerique-nord",
+   "nature": "radio-tv",
+   "orientation": "droite",
+   "orientation_libelle": "Droite",
+   "payant": false,
+   "actif": true,
+   "flux": "https://moxie.foxnews.com/google-publisher/world.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "aljazeera",
+   "nom": "Al Jazeera English",
+   "pays": "QA",
+   "region": "moyen-orient",
+   "nature": "radio-tv",
+   "orientation": "autre",
+   "orientation_libelle": "Autre regard",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.aljazeera.com/xml/rss/all.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "jpost",
+   "nom": "The Jerusalem Post",
+   "pays": "IL",
+   "region": "moyen-orient",
+   "nature": "generaliste",
+   "orientation": "centre-droit",
+   "orientation_libelle": "Centre-droit",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.jpost.com/rss/rssfeedsfrontpage.aspx",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "jeuneafrique",
+   "nom": "Jeune Afrique",
+   "pays": "FR",
+   "region": "afrique",
+   "nature": "magazine",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.jeuneafrique.com/feed/",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "lemondeafrique",
+   "nom": "Le Monde Afrique",
+   "pays": "FR",
+   "region": "afrique",
+   "nature": "generaliste",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": true,
+   "actif": true,
+   "flux": "https://www.lemonde.fr/afrique/rss_full.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "scmp",
+   "nom": "South China Morning Post",
+   "pays": "HK",
+   "region": "asie",
+   "nature": "generaliste",
+   "orientation": "autre",
+   "orientation_libelle": "Autre regard",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.scmp.com/rss/91/feed",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "thehindu",
+   "nom": "The Hindu",
+   "pays": "IN",
+   "region": "asie",
+   "nature": "generaliste",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": false,
+   "actif": true,
+   "flux": "https://www.thehindu.com/news/international/feeder/default.rss",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "elpaisamerica",
+   "nom": "El País América",
+   "pays": "ES",
+   "region": "amerique-latine",
+   "nature": "generaliste",
+   "orientation": "centre-gauche",
+   "orientation_libelle": "Centre-gauche",
+   "payant": false,
+   "actif": true,
+   "flux": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/america/portada",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  },
+  {
+   "id": "folha",
+   "nom": "Folha de S.Paulo",
+   "pays": "BR",
+   "region": "amerique-latine",
+   "nature": "generaliste",
+   "orientation": "centre",
+   "orientation_libelle": "Centre",
+   "payant": false,
+   "actif": true,
+   "flux": "https://feeds.folha.uol.com.br/mundo/rss091.xml",
+   "dernier_succes": "2026-11-27T17:31:10Z",
+   "echecs": 0,
+   "erreur": null,
+   "alerte": false
+  }
+ ],
+ "repartition_articles": {
+  "gauche": 155,
+  "centre-gauche": 386,
+  "centre": 1248,
+  "centre-droit": 289,
+  "droite": 303,
+  "non-partisan": 360,
+  "autre": 201
+ },
+ "journal": [
+  {
+   "le": "2026-11-27T17:36:33Z",
+   "etape": "redaction-edition",
+   "appels": 9,
+   "rejets": 0,
+   "fournisseurs": {
+    "Gemini": 9
+   },
+   "erreurs": {
+    "Gemini HTTP 503": 1,
+    "Gemini HTTP 429": 1
+   },
+   "reutilises": 39,
+   "rediges": 60,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-27T17:31:11Z",
+   "etape": "collecte",
+   "articles_ajoutes": 112,
+   "articles_connus": 7102,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T16:41:51Z",
+   "etape": "redaction-preparation",
+   "appels": 14,
+   "rejets": 7,
+   "fournisseurs": {
+    "Gemini": 14
+   },
+   "erreurs": {
+    "Gemini HTTP 503": 1
+   },
+   "reutilises": 37,
+   "rediges": 60,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-27T16:36:22Z",
+   "etape": "collecte",
+   "articles_ajoutes": 154,
+   "articles_connus": 7126,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T15:32:12Z",
+   "etape": "redaction-preparation",
+   "appels": 10,
+   "rejets": 4,
+   "fournisseurs": {
+    "Gemini": 10
+   },
+   "erreurs": {
+    "Gemini HTTP 503": 1
+   },
+   "reutilises": 39,
+   "rediges": 61,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-27T15:29:33Z",
+   "etape": "collecte",
+   "articles_ajoutes": 121,
+   "articles_connus": 7065,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T14:35:08Z",
+   "etape": "redaction-preparation",
+   "appels": 11,
+   "rejets": 5,
+   "fournisseurs": {
+    "Gemini": 11
+   },
+   "reutilises": 33,
+   "rediges": 60,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-27T14:32:30Z",
+   "etape": "collecte",
+   "articles_ajoutes": 141,
+   "articles_connus": 7110,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T13:10:16Z",
+   "etape": "redaction-preparation",
+   "appels": 5,
+   "rejets": 0,
+   "fournisseurs": {
+    "Gemini": 5
+   },
+   "reutilises": 39,
+   "rediges": 60,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-27T13:08:59Z",
+   "etape": "collecte",
+   "articles_ajoutes": 128,
+   "articles_connus": 7108,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T11:58:15Z",
+   "etape": "redaction-preparation",
+   "appels": 11,
+   "rejets": 5,
+   "fournisseurs": {
+    "Gemini": 11
+   },
+   "reutilises": 34,
+   "rediges": 61,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-27T11:55:39Z",
+   "etape": "collecte",
+   "articles_ajoutes": 163,
+   "articles_connus": 7081,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T10:56:51Z",
+   "etape": "redaction-preparation",
+   "appels": 10,
+   "rejets": 5,
+   "fournisseurs": {
+    "Gemini": 10
+   },
+   "erreurs": {
+    "Gemini HTTP 503": 1
+   },
+   "reutilises": 44,
+   "rediges": 62,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-27T10:54:41Z",
+   "etape": "collecte",
+   "articles_ajoutes": 133,
+   "articles_connus": 7011,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T10:10:08Z",
+   "etape": "redaction-preparation",
+   "appels": 31,
+   "rejets": 13,
+   "fournisseurs": {
+    "Gemini": 31
+   },
+   "erreurs": {
+    "Gemini HTTP 503": 6
+   },
+   "reutilises": 3,
+   "rediges": 62,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-27T10:02:58Z",
+   "etape": "collecte",
+   "articles_ajoutes": 191,
+   "articles_connus": 7037,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T08:46:16Z",
+   "etape": "collecte",
+   "articles_ajoutes": 159,
+   "articles_connus": 6955,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T07:12:09Z",
+   "etape": "collecte",
+   "articles_ajoutes": 141,
+   "articles_connus": 6952,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-27T06:00:04Z",
+   "etape": "collecte",
+   "articles_ajoutes": 359,
+   "articles_connus": 7198,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-26T20:52:18Z",
+   "etape": "collecte",
+   "articles_ajoutes": 74,
+   "articles_connus": 6869,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-26T20:00:32Z",
+   "etape": "collecte",
+   "articles_ajoutes": 96,
+   "articles_connus": 6832,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-26T18:55:11Z",
+   "etape": "collecte",
+   "articles_ajoutes": 120,
+   "articles_connus": 6796,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-26T17:54:49Z",
+   "etape": "collecte",
+   "articles_ajoutes": 131,
+   "articles_connus": 6723,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-26T17:06:24Z",
+   "etape": "publication",
+   "edition": "2026-11-26T1806",
+   "statut_ia": "complet",
+   "ia": 60,
+   "total": 60
+  },
+  {
+   "le": "2026-11-26T17:06:23Z",
+   "etape": "redaction-edition",
+   "appels": 11,
+   "rejets": 0,
+   "fournisseurs": {
+    "Gemini": 11
+   },
+   "erreurs": {
+    "Gemini HTTP 503": 2,
+    "Gemini HTTP 429": 1
+   },
+   "reutilises": 34,
+   "rediges": 60,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-26T17:04:01Z",
+   "etape": "collecte",
+   "articles_ajoutes": 166,
+   "articles_connus": 6791,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-26T16:03:06Z",
+   "etape": "redaction-preparation",
+   "appels": 11,
+   "rejets": 2,
+   "fournisseurs": {
+    "Gemini": 11
+   },
+   "erreurs": {
+    "Gemini HTTP 429": 1,
+    "Gemini HTTP 503": 2
+   },
+   "reutilises": 40,
+   "rediges": 63,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-26T15:58:36Z",
+   "etape": "collecte",
+   "articles_ajoutes": 179,
+   "articles_connus": 6735,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  },
+  {
+   "le": "2026-11-26T14:43:51Z",
+   "etape": "redaction-preparation",
+   "appels": 15,
+   "rejets": 8,
+   "fournisseurs": {
+    "Gemini": 15
+   },
+   "erreurs": {
+    "Gemini réponse illisible": 1,
+    "Gemini HTTP 503": 1
+   },
+   "reutilises": 40,
+   "rediges": 62,
+   "sans_ia": 0
+  },
+  {
+   "le": "2026-11-26T14:40:11Z",
+   "etape": "collecte",
+   "articles_ajoutes": 239,
+   "articles_connus": 6673,
+   "flux_en_echec": [
+    "lesechos",
+    "lesoir"
+   ],
+   "via_api": 0
+  }
+ ]
+}
